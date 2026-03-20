@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Terms of Service — 3TABZ</title>
+  <meta name="description" content="3TABZ Terms of Service. Usage terms and agreements for the 3TABZ medication tracking app." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --black: #0a0a0a; --white: #fafafa;
+      --gray-100: #f5f5f5; --gray-200: #e5e5e5;
+      --gray-400: #a3a3a3; --gray-600: #525252;
+      --accent: #c8f135; --accent-dark: #a8d015;
+      --font-display: 'Syne', sans-serif;
+      --font-body: 'DM Sans', sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--black); color: var(--white);
+      font-family: var(--font-body); font-weight: 300;
+      line-height: 1.7; overflow-x: hidden;
+    }
+    body::before {
+      content: ''; position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 0;
+    }
+    .container { max-width: 100%; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 20px 0; background: rgba(10,10,10,0.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    nav .nav-inner { max-width: 100%; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo { font-family: var(--font-display); font-weight: 800; font-size: 22px; letter-spacing: -0.5px; color: var(--white); text-decoration: none; }
+    .nav-logo span { color: var(--accent); }
+    .nav-back { font-size: 13px; color: var(--gray-400); text-decoration: none; display: flex; align-items: center; gap: 6px; transition: color 0.2s; }
+    .nav-back:hover { color: var(--white); }
+    .page-hero { padding: 140px 0 60px; border-bottom: 1px solid rgba(255,255,255,0.06); margin-bottom: 64px; }
+    .page-badge { display: inline-flex; align-items: center; gap: 8px; border: 1px solid rgba(200,241,53,0.3); padding: 6px 14px; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 24px; }
+    h1 { font-family: var(--font-display); font-weight: 800; font-size: clamp(36px, 6vw, 56px); line-height: 1.05; letter-spacing: -1.5px; margin-bottom: 20px; }
+    .page-meta { font-size: 13px; color: var(--gray-600); }
+    .doc-body { padding-bottom: 100px; }
+    .toc { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-left: 2px solid var(--accent); padding: 24px 28px; margin-bottom: 56px; }
+    .toc-title { font-family: var(--font-display); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray-600); margin-bottom: 16px; }
+    .toc ol { padding-left: 18px; }
+    .toc li { margin-bottom: 8px; }
+    .toc a { color: var(--gray-400); text-decoration: none; font-size: 14px; transition: color 0.2s; }
+    .toc a:hover { color: var(--accent); }
+    .doc-section { margin-bottom: 52px; }
+    .doc-section h2 { font-family: var(--font-display); font-weight: 700; font-size: 22px; letter-spacing: -0.3px; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.06); color: var(--white); }
+    .section-num { color: var(--accent); margin-right: 8px; font-size: 14px; }
+    .doc-section p { color: var(--gray-400); margin-bottom: 16px; font-size: 15px; }
+    .doc-section p:last-child { margin-bottom: 0; }
+    .doc-section ul, .doc-section ol { color: var(--gray-400); padding-left: 20px; margin-bottom: 16px; font-size: 15px; }
+    .doc-section li { margin-bottom: 8px; }
+    .highlight-box { background: rgba(200,241,53,0.05); border: 1px solid rgba(200,241,53,0.15); padding: 20px 24px; margin: 24px 0; }
+    .highlight-box p { color: var(--white) !important; font-size: 14px !important; margin-bottom: 0 !important; }
+    .highlight-box strong { color: var(--accent); }
+    .warning-box { background: rgba(255,80,80,0.05); border: 1px solid rgba(255,80,80,0.2); padding: 20px 24px; margin: 24px 0; }
+    .warning-box p { color: var(--gray-400) !important; font-size: 14px !important; margin-bottom: 0 !important; }
+    .warning-box strong { color: #ff6b6b; }
+    .contact-cta { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); padding: 36px; text-align: center; margin: 60px 0 0; }
+    .contact-cta h3 { font-family: var(--font-display); font-weight: 700; font-size: 20px; margin-bottom: 10px; }
+    .contact-cta p { color: var(--gray-400); font-size: 14px; margin-bottom: 20px; }
+    .contact-cta a.btn { display: inline-block; background: var(--accent); color: var(--black); padding: 12px 28px; font-weight: 600; font-size: 14px; text-decoration: none; font-family: var(--font-display); transition: background 0.2s; }
+    .contact-cta a.btn:hover { background: var(--accent-dark); }
+    footer { border-top: 1px solid rgba(255,255,255,0.06); padding: 32px 0; }
+    .footer-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+    .footer-copy { font-size: 13px; color: var(--gray-600); }
+    .footer-legal { display: flex; gap: 24px; }
+    .footer-legal a { font-size: 13px; color: var(--gray-600); text-decoration: none; transition: color 0.2s; }
+    .footer-legal a:hover { color: var(--white); }
+    @media (max-width: 600px) { .footer-inner { flex-direction: column; text-align: center; } }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">3TAB<span>Z</span></a>
+      <a href="index.html" class="nav-back">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+        Back to home
+      </a>
+    </div>
+  </nav>
+
+  <div class="page-hero">
+    <div class="container">
+      <div class="page-badge">
+        <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+        Legal
+      </div>
+      <h1>Terms of Service</h1>
+      <p class="page-meta">Effective date: 1 January 2025 &nbsp;·&nbsp; Last updated: March 2026</p>
+    </div>
+  </div>
+
+  <div class="doc-body">
+    <div class="container">
+
+      <div class="toc">
+        <div class="toc-title">Contents</div>
+        <ol>
+          <li><a href="#s1">Acceptance of terms</a></li>
+          <li><a href="#s2">Description of service</a></li>
+          <li><a href="#s3">Eligibility</a></li>
+          <li><a href="#s4">Account registration</a></li>
+          <li><a href="#s5">Subscriptions and billing</a></li>
+          <li><a href="#s6">Acceptable use</a></li>
+          <li><a href="#s7">Medical disclaimer</a></li>
+          <li><a href="#s8">Intellectual property</a></li>
+          <li><a href="#s9">Limitation of liability</a></li>
+          <li><a href="#s10">Termination</a></li>
+          <li><a href="#s11">Governing law</a></li>
+          <li><a href="#s12">Changes to terms</a></li>
+          <li><a href="#s13">Contact</a></li>
+        </ol>
+      </div>
+
+      <div class="warning-box">
+        <p><strong>Important:</strong> 3TABZ is a medication tracking tool, not a medical device or professional healthcare service. It does not replace the advice of a qualified healthcare professional. Always consult your doctor or pharmacist before making decisions about your medication.</p>
+      </div>
+
+      <div class="doc-section" id="s1">
+        <h2><span class="section-num">01</span>Acceptance of terms</h2>
+        <p>By downloading, installing, or using the 3TABZ application ("App") or visiting our website ("Site"), you agree to be bound by these Terms of Service ("Terms") and our Privacy Policy.</p>
+        <p>If you do not agree to these Terms, do not use 3TABZ. These Terms constitute a legally binding agreement between you and 3TABZ.</p>
+      </div>
+
+      <div class="doc-section" id="s2">
+        <h2><span class="section-num">02</span>Description of service</h2>
+        <p>3TABZ provides a mobile application and related services for:</p>
+        <ul>
+          <li>Tracking medications, doses, and schedules</li>
+          <li>Sending reminders and health alerts</li>
+          <li>Managing medication inventory</li>
+          <li>AI-powered medication guidance and information</li>
+          <li>Tracking illness history and occurrence patterns</li>
+          <li>Family medication management</li>
+        </ul>
+        <p>We reserve the right to modify, suspend, or discontinue any part of the service at any time with reasonable notice.</p>
+      </div>
+
+      <div class="doc-section" id="s3">
+        <h2><span class="section-num">03</span>Eligibility</h2>
+        <p>You must be at least 13 years old to use 3TABZ. If you are between 13 and 17, you must have parental or guardian consent. By using the App, you represent that you meet these age requirements.</p>
+        <p>3TABZ is available worldwide. It is your responsibility to ensure compliance with local laws regarding medication tracking and health data applications in your jurisdiction.</p>
+      </div>
+
+      <div class="doc-section" id="s4">
+        <h2><span class="section-num">04</span>Account registration</h2>
+        <p>You must create an account to use 3TABZ. You agree to:</p>
+        <ul>
+          <li>Provide accurate and complete information during registration</li>
+          <li>Keep your login credentials confidential</li>
+          <li>Notify us immediately if you suspect unauthorised access to your account</li>
+          <li>Be responsible for all activity that occurs under your account</li>
+        </ul>
+        <p>We reserve the right to suspend or terminate accounts that provide false information or violate these Terms.</p>
+      </div>
+
+      <div class="doc-section" id="s5">
+        <h2><span class="section-num">05</span>Subscriptions and billing</h2>
+        <p><strong style="color:var(--white)">Free tier:</strong> 3TABZ offers a free tier with core functionality at no cost.</p>
+        <p><strong style="color:var(--white)">Pro subscription:</strong> Premium features are available via a paid subscription processed through Apple App Store or Google Play Store. Pricing is displayed in the App and may vary by region.</p>
+        <p><strong style="color:var(--white)">Billing:</strong> Subscriptions are billed in advance on a monthly or annual basis. Payment is charged to your Apple ID or Google account at confirmation of purchase.</p>
+        <p><strong style="color:var(--white)">Auto-renewal:</strong> Subscriptions automatically renew unless cancelled at least 24 hours before the end of the current period. Manage or cancel your subscription in your App Store or Google Play account settings.</p>
+        <p><strong style="color:var(--white)">Refunds:</strong> Refunds are handled by Apple or Google according to their respective refund policies. We do not process refunds directly.</p>
+        <p><strong style="color:var(--white)">Price changes:</strong> We may change subscription pricing with at least 30 days' notice. Continued use after a price change constitutes acceptance.</p>
+      </div>
+
+      <div class="doc-section" id="s6">
+        <h2><span class="section-num">06</span>Acceptable use</h2>
+        <p>You agree not to use 3TABZ to:</p>
+        <ul>
+          <li>Violate any applicable law or regulation</li>
+          <li>Upload false, misleading, or harmful health information</li>
+          <li>Attempt to reverse engineer, decompile, or extract source code from the App</li>
+          <li>Access the service through automated means or scraping</li>
+          <li>Impersonate another person or create accounts on behalf of others without consent</li>
+          <li>Interfere with or disrupt the integrity or performance of the service</li>
+          <li>Attempt to gain unauthorised access to any systems or networks</li>
+          <li>Use the service for any commercial purpose without written permission</li>
+        </ul>
+        <p>Violation of these rules may result in immediate account termination.</p>
+      </div>
+
+      <div class="doc-section" id="s7">
+        <h2><span class="section-num">07</span>Medical disclaimer</h2>
+        <div class="warning-box">
+          <p><strong>3TABZ is not a medical device.</strong> The information and AI guidance provided by 3TABZ is for informational and organisational purposes only. It is not intended to constitute medical advice, diagnosis, or treatment recommendations.</p>
+        </div>
+        <p>Always seek the advice of your physician, pharmacist, or other qualified health provider with any questions you may have regarding a medical condition or medication. Never disregard professional medical advice or delay seeking it because of something you have read in 3TABZ.</p>
+        <p>In case of a medical emergency, call your local emergency services immediately.</p>
+        <p>3TABZ AI features use large language models (OpenAI) and may occasionally produce inaccurate information. You are responsible for verifying all medication information with a healthcare professional.</p>
+      </div>
+
+      <div class="doc-section" id="s8">
+        <h2><span class="section-num">08</span>Intellectual property</h2>
+        <p>The 3TABZ name, logo, App, and all related content, features, and functionality are owned by 3TABZ and are protected by copyright, trademark, and other intellectual property laws.</p>
+        <p>You retain full ownership of the health data you input into 3TABZ. We do not claim any ownership over your personal health information.</p>
+        <p>We grant you a limited, non-exclusive, non-transferable, revocable licence to use the App for your personal, non-commercial use in accordance with these Terms.</p>
+      </div>
+
+      <div class="doc-section" id="s9">
+        <h2><span class="section-num">09</span>Limitation of liability</h2>
+        <p>To the fullest extent permitted by law, 3TABZ and its officers, directors, employees, and agents shall not be liable for:</p>
+        <ul>
+          <li>Any indirect, incidental, special, consequential, or punitive damages</li>
+          <li>Loss of data, profits, goodwill, or other intangible losses</li>
+          <li>Damages resulting from your reliance on AI-generated health guidance</li>
+          <li>Service interruptions or data loss</li>
+          <li>Unauthorised access to or alteration of your data</li>
+        </ul>
+        <p>Our total liability for any claim shall not exceed the amount you paid us in the 12 months preceding the claim, or $50, whichever is greater.</p>
+        <p>Some jurisdictions do not allow exclusion of certain warranties or limitations of liability. In such jurisdictions, our liability is limited to the extent permitted by law.</p>
+      </div>
+
+      <div class="doc-section" id="s10">
+        <h2><span class="section-num">10</span>Termination</h2>
+        <p><strong style="color:var(--white)">By you:</strong> You may delete your account at any time via Settings → Privacy & Data → Delete account. Upon deletion, your data is removed within 30 days.</p>
+        <p><strong style="color:var(--white)">By us:</strong> We may suspend or terminate your account if you violate these Terms, engage in fraudulent activity, or if we determine your use poses a security risk. We will provide notice where reasonably possible.</p>
+        <p>Upon termination, your right to use the service ceases immediately. Provisions of these Terms that by their nature should survive termination shall survive, including Sections 7, 8, 9, and 11.</p>
+      </div>
+
+      <div class="doc-section" id="s11">
+        <h2><span class="section-num">11</span>Governing law</h2>
+        <p>These Terms shall be governed by and construed in accordance with applicable laws. Any disputes arising under these Terms shall be resolved through binding arbitration or in courts of competent jurisdiction.</p>
+        <p>If any provision of these Terms is found to be unenforceable, the remaining provisions will continue in full force.</p>
+      </div>
+
+      <div class="doc-section" id="s12">
+        <h2><span class="section-num">12</span>Changes to terms</h2>
+        <p>We reserve the right to modify these Terms at any time. When we make material changes, we will notify you via email and in-app notification at least 14 days before the changes take effect.</p>
+        <p>Your continued use of 3TABZ after the effective date of the updated Terms constitutes your acceptance of the changes. If you do not agree, you must stop using the service and delete your account.</p>
+      </div>
+
+      <div class="doc-section" id="s13">
+        <h2><span class="section-num">13</span>Contact</h2>
+        <p>If you have any questions about these Terms of Service:</p>
+        <ul>
+          <li>Email: <a href="mailto:support@3tabz.com" style="color:var(--accent)">support@3tabz.com</a></li>
+          <li>In-app: Settings → Help & Support</li>
+        </ul>
+      </div>
+
+      <div class="contact-cta">
+        <h3>Questions about these terms?</h3>
+        <p>Our team is happy to clarify anything.</p>
+        <a href="mailto:support@3tabz.com" class="btn">Email support@3tabz.com</a>
+      </div>
+
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-copy">© 2025 3TABZ. All rights reserved.</div>
+      <div class="footer-legal">
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+        <a href="support.html">Support</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

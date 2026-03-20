@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy — 3TABZ</title>
+  <meta name="description" content="3TABZ Privacy Policy. How we collect, use, and protect your health data." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --black: #0a0a0a; --white: #fafafa;
+      --gray-100: #f5f5f5; --gray-200: #e5e5e5;
+      --gray-400: #a3a3a3; --gray-600: #525252;
+      --accent: #c8f135; --accent-dark: #a8d015;
+      --font-display: 'Syne', sans-serif;
+      --font-body: 'DM Sans', sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--black); color: var(--white);
+      font-family: var(--font-body); font-weight: 300;
+      line-height: 1.7; overflow-x: hidden;
+    }
+    body::before {
+      content: ''; position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 0;
+    }
+    .container { max-width: 100%; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 20px 0; background: rgba(10,10,10,0.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    nav .container { max-width: 100%; display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo {
+      font-family: var(--font-display); font-weight: 800;
+      font-size: 22px; letter-spacing: -0.5px;
+      color: var(--white); text-decoration: none;
+    }
+    .nav-logo span { color: var(--accent); }
+    .nav-back {
+      font-size: 13px; color: var(--gray-400); text-decoration: none;
+      display: flex; align-items: center; gap: 6px; transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--white); }
+    .nav-back svg { width: 14px; height: 14px; }
+
+    /* HERO BAND */
+    .page-hero {
+      padding: 140px 0 60px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      margin-bottom: 64px;
+    }
+    .page-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      border: 1px solid rgba(200,241,53,0.3);
+      padding: 6px 14px; font-size: 11px; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 24px;
+    }
+    .page-badge svg { width: 12px; height: 12px; }
+    h1 {
+      font-family: var(--font-display); font-weight: 800;
+      font-size: clamp(36px, 6vw, 56px); line-height: 1.05;
+      letter-spacing: -1.5px; margin-bottom: 20px;
+    }
+    .page-meta { font-size: 13px; color: var(--gray-600); }
+
+    /* CONTENT */
+    .doc-body { padding-bottom: 100px; }
+
+    .toc {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-left: 2px solid var(--accent);
+      padding: 24px 28px; margin-bottom: 56px;
+    }
+    .toc-title {
+      font-family: var(--font-display); font-size: 11px;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--gray-600); margin-bottom: 16px;
+    }
+    .toc ol { padding-left: 18px; }
+    .toc li { margin-bottom: 8px; }
+    .toc a { color: var(--gray-400); text-decoration: none; font-size: 14px; transition: color 0.2s; }
+    .toc a:hover { color: var(--accent); }
+
+    .doc-section { margin-bottom: 52px; }
+    .doc-section h2 {
+      font-family: var(--font-display); font-weight: 700;
+      font-size: 22px; letter-spacing: -0.3px;
+      margin-bottom: 20px; padding-bottom: 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      color: var(--white);
+    }
+    .section-num {
+      color: var(--accent); margin-right: 8px; font-size: 14px;
+    }
+    .doc-section p { color: var(--gray-400); margin-bottom: 16px; font-size: 15px; }
+    .doc-section p:last-child { margin-bottom: 0; }
+    .doc-section ul, .doc-section ol {
+      color: var(--gray-400); padding-left: 20px;
+      margin-bottom: 16px; font-size: 15px;
+    }
+    .doc-section li { margin-bottom: 8px; }
+
+    .highlight-box {
+      background: rgba(200,241,53,0.05);
+      border: 1px solid rgba(200,241,53,0.15);
+      padding: 20px 24px; margin: 24px 0;
+    }
+    .highlight-box p { color: var(--white) !important; font-size: 14px !important; }
+    .highlight-box strong { color: var(--accent); }
+
+    .data-table {
+      width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 14px;
+    }
+    .data-table th {
+      text-align: left; padding: 10px 16px;
+      background: rgba(255,255,255,0.04);
+      color: var(--gray-400); font-weight: 500;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      font-family: var(--font-display); font-size: 11px;
+      letter-spacing: 0.08em; text-transform: uppercase;
+    }
+    .data-table td {
+      padding: 12px 16px; color: var(--gray-400);
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      vertical-align: top;
+    }
+    .data-table tr:last-child td { border-bottom: none; }
+
+    /* CONTACT CTA */
+    .contact-cta {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 36px; text-align: center; margin: 60px 0 0;
+    }
+    .contact-cta h3 {
+      font-family: var(--font-display); font-weight: 700;
+      font-size: 20px; margin-bottom: 10px;
+    }
+    .contact-cta p { color: var(--gray-400); font-size: 14px; margin-bottom: 20px; }
+    .contact-cta a.btn {
+      display: inline-block; background: var(--accent); color: var(--black);
+      padding: 12px 28px; font-weight: 600; font-size: 14px;
+      text-decoration: none; font-family: var(--font-display);
+      transition: background 0.2s;
+    }
+    .contact-cta a.btn:hover { background: var(--accent-dark); }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 32px 0; text-align: center;
+    }
+    footer .container { max-width: 1200px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+    .footer-copy { font-size: 13px; color: var(--gray-600); }
+    .footer-legal { display: flex; gap: 24px; }
+    .footer-legal a { font-size: 13px; color: var(--gray-600); text-decoration: none; transition: color 0.2s; }
+    .footer-legal a:hover { color: var(--white); }
+
+    @media (max-width: 600px) {
+      footer .container { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="container">
+      <a href="index.html" class="nav-logo">3TAB<span>Z</span></a>
+      <a href="index.html" class="nav-back">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+        Back to home
+      </a>
+    </div>
+  </nav>
+
+  <div class="page-hero">
+    <div class="container">
+      <div class="page-badge">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+        Legal
+      </div>
+      <h1>Privacy Policy</h1>
+      <p class="page-meta">Effective date: 1 January 2025 &nbsp;·&nbsp; Last updated: March 2026</p>
+    </div>
+  </div>
+
+  <div class="doc-body">
+    <div class="container">
+
+      <div class="toc">
+        <div class="toc-title">Contents</div>
+        <ol>
+          <li><a href="#s1">Information we collect</a></li>
+          <li><a href="#s2">How we use your information</a></li>
+          <li><a href="#s3">Data storage and security</a></li>
+          <li><a href="#s4">Data sharing and third parties</a></li>
+          <li><a href="#s5">Your rights</a></li>
+          <li><a href="#s6">Children's privacy</a></li>
+          <li><a href="#s7">Data retention</a></li>
+          <li><a href="#s8">International transfers</a></li>
+          <li><a href="#s9">Changes to this policy</a></li>
+          <li><a href="#s10">Contact us</a></li>
+        </ol>
+      </div>
+
+      <div class="highlight-box">
+        <p><strong>The short version:</strong> Your health data is yours. We never sell it, never share it with advertisers or insurance companies, and we encrypt it at rest and in transit. You can export or delete everything at any time.</p>
+      </div>
+
+      <div class="doc-section" id="s1">
+        <h2><span class="section-num">01</span>Information we collect</h2>
+        <p>We collect only the data needed to provide the 3TABZ service. We do not collect data for advertising purposes.</p>
+        <table class="data-table">
+          <thead>
+            <tr><th>Category</th><th>What we collect</th><th>Why</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong style="color:var(--white)">Account</strong></td>
+              <td>Email address, full name, password (hashed)</td>
+              <td>Authentication and account management</td>
+            </tr>
+            <tr>
+              <td><strong style="color:var(--white)">Health data</strong></td>
+              <td>Medications, doses, schedules, logs, temperature readings, illness history, occurrence records</td>
+              <td>Core app functionality</td>
+            </tr>
+            <tr>
+              <td><strong style="color:var(--white)">Device</strong></td>
+              <td>Push notification token, device platform (iOS/Android)</td>
+              <td>Sending reminders and alerts</td>
+            </tr>
+            <tr>
+              <td><strong style="color:var(--white)">Usage</strong></td>
+              <td>Anonymous feature usage, crash reports</td>
+              <td>Improving reliability and performance</td>
+            </tr>
+            <tr>
+              <td><strong style="color:var(--white)">AI interactions</strong></td>
+              <td>Medication queries sent to AI features</td>
+              <td>Generating personalised guidance</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>We do not collect your precise GPS location, contacts, camera, microphone, or any data unrelated to medication management.</p>
+      </div>
+
+      <div class="doc-section" id="s2">
+        <h2><span class="section-num">02</span>How we use your information</h2>
+        <p>We use your information exclusively to:</p>
+        <ul>
+          <li>Provide, maintain, and improve the 3TABZ app</li>
+          <li>Send medication reminders and health alerts you have configured</li>
+          <li>Generate AI-powered medication guidance (processed by OpenAI on your behalf)</li>
+          <li>Detect and prevent fraud, abuse, or security incidents</li>
+          <li>Comply with legal obligations</li>
+          <li>Respond to your support requests</li>
+        </ul>
+        <p>We do not use your health data to build advertising profiles, infer insurance risk, or train AI models without your explicit, separate consent.</p>
+      </div>
+
+      <div class="doc-section" id="s3">
+        <h2><span class="section-num">03</span>Data storage and security</h2>
+        <p>All data is stored on servers in secure cloud infrastructure. We implement the following protections:</p>
+        <ul>
+          <li>TLS encryption for all data in transit</li>
+          <li>AES-256 encryption for sensitive fields at rest</li>
+          <li>Hashed passwords (bcrypt, never stored in plaintext)</li>
+          <li>JWT tokens with short expiry and rotation on use</li>
+          <li>Access control: our staff can only access your data for support purposes, with logging</li>
+          <li>Regular security audits and dependency updates</li>
+        </ul>
+        <p>No system is 100% secure. If a breach occurs that affects your personal data, we will notify you within 72 hours as required by applicable law.</p>
+      </div>
+
+      <div class="doc-section" id="s4">
+        <h2><span class="section-num">04</span>Data sharing and third parties</h2>
+        <p>We share your data with the following categories of third parties only as necessary to provide the service:</p>
+        <table class="data-table">
+          <thead>
+            <tr><th>Service</th><th>Purpose</th><th>Data shared</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong style="color:var(--white)">OpenAI</strong></td>
+              <td>AI medication guidance</td>
+              <td>Medication names and queries (no identifying info)</td>
+            </tr>
+            <tr>
+              <td><strong style="color:var(--white)">Expo / FCM / APNs</strong></td>
+              <td>Push notifications</td>
+              <td>Push token, notification content</td>
+            </tr>
+            <tr>
+              <td><strong style="color:var(--white)">Apple / Google</strong></td>
+              <td>In-app purchase verification</td>
+              <td>Purchase receipts (no health data)</td>
+            </tr>
+            <tr>
+              <td><strong style="color:var(--white)">Email provider</strong></td>
+              <td>Transactional emails</td>
+              <td>Email address only</td>
+            </tr>
+          </tbody>
+        </table>
+        <p><strong style="color:var(--white)">We never sell your data.</strong> We never share your health data with advertisers, insurance companies, employers, or data brokers — ever.</p>
+        <p>We may disclose data if required by a valid legal process (court order, subpoena). We will notify you when legally permitted to do so.</p>
+      </div>
+
+      <div class="doc-section" id="s5">
+        <h2><span class="section-num">05</span>Your rights</h2>
+        <p>Depending on your location, you may have the following rights regarding your personal data:</p>
+        <ul>
+          <li><strong style="color:var(--white)">Access</strong> — request a copy of all data we hold about you</li>
+          <li><strong style="color:var(--white)">Export</strong> — download a machine-readable copy of your data from the app (Settings → Privacy & Data → Export my data)</li>
+          <li><strong style="color:var(--white)">Correction</strong> — update inaccurate information at any time in-app</li>
+          <li><strong style="color:var(--white)">Deletion</strong> — request permanent deletion of your account and all associated data (Settings → Privacy & Data → Delete account). Data is purged within 30 days.</li>
+          <li><strong style="color:var(--white)">Portability</strong> — receive your data in a structured, machine-readable format</li>
+          <li><strong style="color:var(--white)">Objection</strong> — object to processing for purposes other than providing the service</li>
+        </ul>
+        <p>To exercise any right, use the in-app controls or email <a href="mailto:support@3tabz.com" style="color:var(--accent)">support@3tabz.com</a>. We respond within 30 days.</p>
+      </div>
+
+      <div class="doc-section" id="s6">
+        <h2><span class="section-num">06</span>Children's privacy</h2>
+        <p>3TABZ is not directed at children under 13. We do not knowingly collect personal information from children under 13. If you are a parent or guardian and believe your child has provided us with personal data, please contact us and we will delete it promptly.</p>
+        <p>Users aged 13–17 may use the app only with parental consent.</p>
+      </div>
+
+      <div class="doc-section" id="s7">
+        <h2><span class="section-num">07</span>Data retention</h2>
+        <p>We retain your data for as long as your account is active. When you delete your account:</p>
+        <ul>
+          <li>All health records (medications, logs, reminders, etc.) are deleted within 30 days</li>
+          <li>Account credentials are deleted immediately</li>
+          <li>Anonymised, non-identifiable usage statistics may be retained for service improvement</li>
+          <li>Billing records may be retained for up to 7 years as required by tax law</li>
+        </ul>
+      </div>
+
+      <div class="doc-section" id="s8">
+        <h2><span class="section-num">08</span>International transfers</h2>
+        <p>3TABZ operates globally. Your data may be processed in countries outside your own, including the United States and European Union. Where required, we use Standard Contractual Clauses or other lawful transfer mechanisms to protect your data.</p>
+      </div>
+
+      <div class="doc-section" id="s9">
+        <h2><span class="section-num">09</span>Changes to this policy</h2>
+        <p>We may update this Privacy Policy from time to time. When we make material changes, we will notify you by email and with an in-app banner at least 14 days before the change takes effect. Your continued use of 3TABZ after that date constitutes acceptance of the updated policy.</p>
+        <p>The "Last updated" date at the top of this page reflects the most recent revision.</p>
+      </div>
+
+      <div class="doc-section" id="s10">
+        <h2><span class="section-num">10</span>Contact us</h2>
+        <p>For any privacy-related questions, data requests, or concerns:</p>
+        <ul>
+          <li>Email: <a href="mailto:support@3tabz.com" style="color:var(--accent)">support@3tabz.com</a></li>
+          <li>In-app: Settings → Privacy & Data → Data requests</li>
+        </ul>
+        <p>We are committed to resolving complaints. If you are in the European Economic Area and believe your rights have been violated, you also have the right to lodge a complaint with your local data protection authority.</p>
+      </div>
+
+      <div class="contact-cta">
+        <h3>Questions about your data?</h3>
+        <p>We're here to help. Contact our team directly.</p>
+        <a href="mailto:support@3tabz.com" class="btn">Email support@3tabz.com</a>
+      </div>
+
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <div class="footer-copy">© 2025 3TABZ. All rights reserved.</div>
+      <div class="footer-legal">
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+        <a href="support.html">Support</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

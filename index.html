@@ -1,0 +1,1105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>3TABZ — Your Personal Health Manager. Never Miss a Dose.</title>
+  <meta name="description" content="3TABZ is the AI-powered medication manager that tracks every dose, predicts recurring conditions, manages your whole family, and tells you what other apps can't. Free on iOS & Android." />
+  <meta property="og:title" content="3TABZ — Your Medications. Organised. Never Missed." />
+  <meta property="og:description" content="The only medication app with AI health guidance, occurrence prediction, family management and offline sync. Free to start." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://3tabz.com" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black:   #080808;
+      --black2:  #0d0d0d;
+      --white:   #f5f5f0;
+      --gray-100:#ebebeb;
+      --gray-200:#d4d4d4;
+      --gray-400:#888;
+      --gray-600:#444;
+      --accent:  #c8f135;
+      --accent-d:#a8d015;
+      --accent-dim: rgba(200,241,53,0.12);
+      --border:  rgba(255,255,255,0.07);
+      --font-h:  'Syne', sans-serif;
+      --font-b:  'DM Sans', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: var(--font-b);
+      font-weight: 300;
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    /* grain overlay */
+    body::after {
+      content:'';
+      position:fixed;
+      inset:0;
+      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+      pointer-events:none;
+      z-index:9999;
+    }
+
+    .container { max-width:100%; margin:0 auto; padding:0 28px; position:relative; z-index:1;}
+
+    /* Reveal animation */
+    .rv { opacity:0; transform:translateY(24px); transition:opacity .6s ease, transform .6s ease; }
+    .rv.in { opacity:1; transform:none; }
+    .rv.d1 { transition-delay:.1s; }
+    .rv.d2 { transition-delay:.2s; }
+    .rv.d3 { transition-delay:.3s; }
+
+    /* ─── NAV ─────────────────────────────────────────────────── */
+    nav {
+      position:fixed; top:0; left:0; right:0; z-index:200;
+      padding:18px 0;
+      transition: background .3s, border-color .3s;
+    }
+    nav.scrolled {
+      background: rgba(8,8,8,.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    nav .container { display:flex; align-items:center; justify-content:space-between; }
+    .nav-logo {
+      font-family:var(--font-h); font-weight:800; font-size:20px;
+      letter-spacing:-.5px; color:var(--white); text-decoration:none;
+    }
+    .nav-logo em { color:var(--accent); font-style:normal; }
+    .nav-links { display:flex; align-items:center; gap:28px; list-style:none; }
+    .nav-links a { color:var(--gray-400); text-decoration:none; font-size:13.5px; transition:color .2s; }
+    .nav-links a:hover { color:var(--white); }
+    .nav-cta {
+      background:var(--accent); color:var(--black);
+      padding:7px 18px; font-weight:600; font-size:13px;
+      border-radius:2px; transition: background .2s;
+    }
+    .nav-cta:hover { background:var(--accent-d); color:var(--black) !important; }
+    .nav-mob { display:none; }
+
+    /* ─── HERO ───────────────────────────────────────────────── */
+    .hero {
+      min-height:100vh;
+      display:flex; align-items:center;
+      padding-top:80px;
+      position:relative; overflow:hidden;
+    }
+    .hero-grid {
+      position:absolute; inset:0;
+      background-image:
+        linear-gradient(rgba(200,241,53,.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(200,241,53,.035) 1px, transparent 1px);
+      background-size:56px 56px;
+      mask-image:radial-gradient(ellipse 70% 70% at 50% 40%, black 0%, transparent 72%);
+    }
+    .hero-glow {
+      position:absolute; right:-160px; top:50%; transform:translateY(-50%);
+      width:700px; height:700px; border-radius:50%;
+      background:radial-gradient(circle, rgba(200,241,53,.1) 0%, transparent 65%);
+      filter:blur(50px); pointer-events:none;
+    }
+    .hero .container {
+      display:grid; grid-template-columns:1fr 1fr;
+      gap:72px; align-items:center;
+    }
+    .badge {
+      display:inline-flex; align-items:center; gap:8px;
+      background:rgba(200,241,53,.09);
+      border:1px solid rgba(200,241,53,.22);
+      border-radius:100px; padding:5px 14px;
+      font-size:11.5px; font-weight:500; color:var(--accent);
+      margin-bottom:26px;
+    }
+    .badge-dot {
+      width:6px; height:6px; border-radius:50%;
+      background:var(--accent);
+      animation:blink 2.2s infinite;
+    }
+    @keyframes blink {
+      0%,100%{opacity:1;transform:scale(1)}
+      50%{opacity:.4;transform:scale(1.5)}
+    }
+    h1 {
+      font-family:var(--font-h); font-weight:800;
+      font-size:clamp(44px, 5.5vw, 74px);
+      line-height:1.04; letter-spacing:-2.5px;
+      margin-bottom:22px;
+    }
+    h1 .ac { color:var(--accent); }
+    .hero-sub {
+      font-size:16.5px; color:var(--gray-400);
+      max-width:430px; line-height:1.75; margin-bottom:36px;
+    }
+    .hero-sub strong { color:var(--white); font-weight:500; }
+
+    /* Store buttons */
+    .dl-group { display:flex; gap:12px; flex-wrap:wrap; }
+    .dl-btn {
+      display:inline-flex; align-items:center; gap:10px;
+      padding:13px 24px; border-radius:3px;
+      font-family:var(--font-b); font-weight:500;
+      font-size:14px; cursor:pointer; text-decoration:none;
+      transition:all .2s;
+    }
+    .dl-btn-ios { background:var(--white); color:var(--black); }
+    .dl-btn-ios:hover { background:var(--accent); }
+    .dl-btn-and {
+      background:transparent; color:var(--white);
+      border:1px solid rgba(255,255,255,.18);
+    }
+    .dl-btn-and:hover { border-color:rgba(255,255,255,.4); background:rgba(255,255,255,.04); }
+
+    .hero-trust {
+      display:flex; gap:28px; margin-top:44px;
+      padding-top:28px; border-top:1px solid var(--border);
+    }
+    .trust-num {
+      font-family:var(--font-h); font-weight:700; font-size:24px;
+    }
+    .trust-label { font-size:11.5px; color:var(--gray-400); margin-top:2px; }
+
+    /* Phone mockup */
+    .hero-vis { display:flex; justify-content:center; position:relative; }
+    .phone-wrap { position:relative; width:272px; }
+    .phone {
+      width:272px; height:572px; background:#111;
+      border-radius:38px;
+      border:1px solid rgba(255,255,255,.1);
+      overflow:hidden;
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,.04),
+        0 40px 90px rgba(0,0,0,.7),
+        0 0 80px rgba(200,241,53,.06);
+    }
+    .ph-status { display:flex; justify-content:space-between; padding:14px 20px 6px; font-size:11px; color:var(--gray-400); }
+    .ph-head { padding:6px 20px 14px; border-bottom:1px solid rgba(255,255,255,.06); }
+    .ph-date { font-size:10px; color:var(--gray-400); text-transform:uppercase; letter-spacing:1px; margin-bottom:5px; }
+    .ph-title { font-family:var(--font-h); font-size:20px; font-weight:700; color:var(--white); display:flex; justify-content:space-between; align-items:flex-end; }
+    .ph-adh { font-size:11px; color:var(--accent); font-weight:500; }
+    .ph-row { display:flex; margin:14px 18px; border:1px solid rgba(255,255,255,.07); }
+    .ph-stat { flex:1; text-align:center; padding:9px 4px; border-right:1px solid rgba(255,255,255,.07); }
+    .ph-stat:last-child { border-right:none; }
+    .ph-sn { font-family:var(--font-h); font-size:17px; font-weight:700; color:var(--white); }
+    .ph-sl { font-size:8px; color:var(--gray-400); text-transform:uppercase; letter-spacing:.5px; }
+    .ph-next { margin:0 18px 14px; background:var(--white); padding:9px 14px; display:flex; align-items:center; justify-content:space-between; }
+    .ph-nl { font-size:9px; color:#737373; text-transform:uppercase; letter-spacing:.5px; }
+    .ph-nm { font-family:var(--font-h); font-size:13px; font-weight:700; color:var(--black); }
+    .ph-nt { font-size:11px; color:#737373; }
+    .ph-sec { font-size:9px; color:var(--gray-400); text-transform:uppercase; letter-spacing:1px; padding:0 18px; margin-bottom:9px; }
+    .ph-card { margin:0 18px 7px; border:1px solid rgba(255,255,255,.07); padding:11px 13px; display:flex; align-items:center; justify-content:space-between; }
+    .ph-mn { font-size:12.5px; font-weight:500; color:var(--white); }
+    .ph-md { font-size:9.5px; color:var(--gray-400); margin-top:2px; }
+    .ph-chk { width:21px; height:21px; border:1.5px solid rgba(255,255,255,.25); border-radius:50%; display:flex; align-items:center; justify-content:center; }
+    .ph-chk.ok { border-color:var(--accent); background:var(--accent); }
+    .ph-chk.ok::after { content:'✓'; font-size:10px; color:var(--black); }
+
+    /* floating chips */
+    .chip {
+      position:absolute;
+      background:rgba(8,8,8,.88); border:1px solid rgba(200,241,53,.28);
+      border-radius:100px; padding:7px 14px;
+      font-size:11.5px; color:var(--white); white-space:nowrap;
+      backdrop-filter:blur(10px);
+      animation:fl 4s ease-in-out infinite;
+    }
+    .chip:nth-child(1) { top:55px; right:-88px; animation-delay:0s; }
+    .chip:nth-child(2) { bottom:160px; right:-95px; animation-delay:1.4s; }
+    .chip:nth-child(3) { bottom:80px; left:-85px; animation-delay:.7s; }
+    @keyframes fl { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-9px)} }
+
+    /* ─── PAIN STRIP ──────────────────────────────────────────── */
+    .pain {
+      padding:72px 0;
+      border-top:1px solid var(--border);
+      border-bottom:1px solid var(--border);
+      background:var(--black2);
+    }
+    .pain .container {
+      display:grid; grid-template-columns:repeat(3,1fr); gap:40px;
+    }
+    .pain-item { padding:32px; border:1px solid rgba(255,255,255,.05); }
+    .pain-emoji { font-size:26px; margin-bottom:14px; display:block; }
+    .pain-head {
+      font-family:var(--font-h); font-weight:700; font-size:15.5px;
+      margin-bottom:8px; color:var(--white);
+    }
+    .pain-body { font-size:13.5px; color:var(--gray-400); line-height:1.7; }
+    .pain-stat {
+      margin-top:14px; padding-top:14px; border-top:1px solid var(--border);
+      font-size:12px; color:var(--accent); font-weight:500;
+    }
+
+    /* ─── SECTION LABELS ─────────────────────────────────────── */
+    .tag {
+      display:inline-block; font-size:11px; font-weight:600;
+      text-transform:uppercase; letter-spacing:2.5px;
+      color:var(--accent); margin-bottom:14px;
+    }
+    h2 {
+      font-family:var(--font-h); font-weight:800;
+      font-size:clamp(30px, 4vw, 50px);
+      letter-spacing:-1.5px; line-height:1.1; margin-bottom:14px;
+    }
+    .sub { font-size:15.5px; color:var(--gray-400); max-width:500px; line-height:1.75; }
+
+    /* ─── VS SECTION ─────────────────────────────────────────── */
+    .vs { padding:100px 0; }
+    .vs-inner {
+      display:grid; grid-template-columns:1fr 1fr; gap:2px;
+      background:var(--border); margin-top:64px;
+    }
+    .vs-col { background:var(--black); padding:40px; }
+    .vs-col.them { background:var(--black2); }
+    .vs-label {
+      font-family:var(--font-h); font-weight:800; font-size:13px;
+      text-transform:uppercase; letter-spacing:2px;
+      margin-bottom:28px; display:flex; align-items:center; gap:10px;
+    }
+    .vs-label.us { color:var(--accent); }
+    .vs-label.them { color:var(--gray-600); }
+    .vs-dot { width:8px; height:8px; border-radius:50%; }
+    .vs-dot.us { background:var(--accent); }
+    .vs-dot.them { background:var(--gray-600); }
+    .vs-row {
+      display:flex; align-items:flex-start; gap:12px;
+      padding:13px 0; border-bottom:1px solid var(--border);
+      font-size:14px; line-height:1.55;
+    }
+    .vs-row:last-child { border-bottom:none; }
+    .vs-icon { font-size:14px; flex-shrink:0; margin-top:1px; }
+    .vs-row.win { color:var(--white); }
+    .vs-row.lose { color:var(--gray-600); }
+
+    /* ─── FEATURES ───────────────────────────────────────────── */
+    .feats { padding:100px 0; background:var(--black2); }
+    .feats-head { margin-bottom:60px; }
+    .feats-grid {
+      display:grid; grid-template-columns:repeat(3,1fr);
+      gap:1px; background:var(--border);
+      border:1px solid var(--border);
+    }
+    .fc {
+      background:var(--black2); padding:36px 32px;
+      position:relative; overflow:hidden;
+      transition:background .3s;
+    }
+    .fc::after {
+      content:''; position:absolute; inset:0;
+      background:radial-gradient(circle at 0% 0%, rgba(200,241,53,.07) 0%, transparent 55%);
+      opacity:0; transition:opacity .3s;
+    }
+    .fc:hover { background:#111; }
+    .fc:hover::after { opacity:1; }
+    .fc-n {
+      font-family:var(--font-h); font-size:11px; font-weight:600;
+      color:var(--accent); letter-spacing:2px; margin-bottom:18px;
+    }
+    .fc-icon { font-size:26px; margin-bottom:14px; display:block; }
+    .fc-title {
+      font-family:var(--font-h); font-weight:700;
+      font-size:17px; margin-bottom:8px; letter-spacing:-.2px;
+    }
+    .fc-body { font-size:13.5px; color:var(--gray-400); line-height:1.7; }
+    .fc-pro {
+      position:absolute; top:32px; right:32px;
+      background:rgba(200,241,53,.1); border:1px solid rgba(200,241,53,.2);
+      border-radius:3px; padding:2px 8px;
+      font-size:9.5px; font-weight:700; color:var(--accent); letter-spacing:1px;
+    }
+    .fc-edge {
+      margin-top:14px; padding-top:12px; border-top:1px solid var(--border);
+      font-size:12px; color:rgba(200,241,53,.7); font-style:italic;
+    }
+
+    /* ─── CONSEQUENCES ───────────────────────────────────────── */
+    .consequences { padding:100px 0; }
+    .cons-grid {
+      display:grid; grid-template-columns:repeat(2,1fr);
+      gap:24px; margin-top:60px;
+    }
+    .cons-card {
+      border:1px solid rgba(255,80,80,.15);
+      background:rgba(255,40,40,.03);
+      padding:32px;
+    }
+    .cons-card.positive {
+      border-color:rgba(200,241,53,.2);
+      background:rgba(200,241,53,.03);
+    }
+    .cons-header {
+      display:flex; align-items:center; gap:12px;
+      font-family:var(--font-h); font-weight:700; font-size:16px;
+      margin-bottom:16px;
+    }
+    .cons-header span { font-size:22px; }
+    .cons-list { list-style:none; }
+    .cons-list li {
+      font-size:14px; color:var(--gray-400);
+      padding:9px 0; border-bottom:1px solid var(--border);
+      display:flex; gap:10px; align-items:flex-start; line-height:1.55;
+    }
+    .cons-list li:last-child { border-bottom:none; }
+    .cons-list li::before { content:'—'; color:rgba(255,80,80,.6); flex-shrink:0; }
+    .cons-card.positive .cons-list li::before { content:'✓'; color:var(--accent); }
+
+    /* ─── HOW IT WORKS ───────────────────────────────────────── */
+    .how { padding:100px 0; background:var(--black2); }
+    .steps {
+      display:grid; grid-template-columns:repeat(4,1fr);
+      gap:36px; margin-top:60px;
+    }
+    .step { position:relative; }
+    .step-bg {
+      font-family:var(--font-h); font-size:72px; font-weight:800;
+      color:rgba(255,255,255,.03); line-height:1; margin-bottom:-18px;
+    }
+    .step-dot {
+      width:40px; height:40px;
+      border:2px solid var(--accent); border-radius:50%;
+      display:flex; align-items:center; justify-content:center;
+      font-size:16px; margin-bottom:18px;
+    }
+    .step-title { font-family:var(--font-h); font-weight:700; font-size:15px; margin-bottom:7px; }
+    .step-body { font-size:13px; color:var(--gray-400); line-height:1.65; }
+    .step-arr { position:absolute; top:66px; right:-18px; color:var(--gray-600); font-size:18px; }
+
+    /* ─── SOCIAL PROOF ───────────────────────────────────────── */
+    .proof { padding:100px 0; }
+    .reviews {
+      display:grid; grid-template-columns:repeat(3,1fr);
+      gap:20px; margin-top:52px;
+    }
+    .rev {
+      border:1px solid var(--border); padding:28px;
+      position:relative; transition:border-color .25s;
+    }
+    .rev:hover { border-color:rgba(200,241,53,.25); }
+    .rev-stars { color:var(--accent); font-size:13px; letter-spacing:2px; margin-bottom:14px; }
+    .rev-text { font-size:14.5px; line-height:1.75; color:var(--gray-200); margin-bottom:20px; }
+    .rev-text em { color:var(--accent); font-style:normal; font-weight:500; }
+    .rev-foot { display:flex; align-items:center; gap:11px; }
+    .rev-av { width:34px; height:34px; border-radius:50%; background:rgba(255,255,255,.07); display:flex; align-items:center; justify-content:center; font-size:14px; }
+    .rev-name { font-size:13px; font-weight:500; }
+    .rev-meta { font-size:11px; color:var(--gray-400); }
+
+    /* ─── PRICING ────────────────────────────────────────────── */
+    .pricing { padding:100px 0; background:var(--black2); }
+    .pricing-cards {
+      display:grid; grid-template-columns:1fr 1fr;
+      gap:20px; max-width:760px; margin:60px auto 0;
+    }
+    .pc {
+      border:1px solid rgba(255,255,255,.08);
+      padding:40px; position:relative;
+    }
+    .pc.hot { border-color:var(--accent); background:rgba(200,241,53,.03); }
+    .pc-badge {
+      position:absolute; top:-1px; left:50%; transform:translateX(-50%);
+      background:var(--accent); color:var(--black);
+      font-size:10px; font-weight:800; padding:3px 14px; letter-spacing:1px;
+    }
+    .pc-name {
+      font-family:var(--font-h); font-weight:800; font-size:12px;
+      text-transform:uppercase; letter-spacing:2.5px;
+      color:var(--gray-400); margin-bottom:14px;
+    }
+    .pc-price {
+      font-family:var(--font-h); font-size:52px; font-weight:800;
+      letter-spacing:-2px; line-height:1; margin-bottom:4px;
+    }
+    .pc-price sup { font-size:20px; vertical-align:top; margin-top:12px; display:inline-block; }
+    .pc-per { font-size:13px; color:var(--gray-400); margin-bottom:28px; }
+    .pc-feats { list-style:none; margin-bottom:32px; }
+    .pc-feats li {
+      font-size:13.5px; padding:8px 0;
+      border-bottom:1px solid var(--border);
+      display:flex; gap:10px; align-items:center; color:var(--gray-200);
+    }
+    .pc-feats li::before { content:'✓'; color:var(--accent); font-size:11px; font-weight:700; flex-shrink:0; }
+    .pc-feats li.no { color:var(--gray-600); }
+    .pc-feats li.no::before { content:'—'; color:var(--gray-600); }
+    .pc-btn {
+      display:block; width:100%; text-align:center;
+      padding:13px; border-radius:2px; font-weight:600;
+      font-size:14px; cursor:pointer; text-decoration:none;
+      transition:all .2s;
+    }
+    .pc-btn-free { border:1px solid rgba(255,255,255,.15); color:var(--white); }
+    .pc-btn-free:hover { border-color:rgba(255,255,255,.35); background:rgba(255,255,255,.04); }
+    .pc-btn-pro { background:var(--accent); color:var(--black); }
+    .pc-btn-pro:hover { background:var(--accent-d); }
+
+    /* ─── FAQ ────────────────────────────────────────────────── */
+    .faq { padding:100px 0; }
+    .faq-list { max-width:700px; margin:52px auto 0; }
+    .faq-item { border-bottom:1px solid var(--border); }
+    .faq-q {
+      width:100%; background:none; border:none;
+      color:var(--white); font-family:var(--font-b);
+      font-size:15.5px; font-weight:400; text-align:left;
+      padding:22px 0; cursor:pointer;
+      display:flex; justify-content:space-between; align-items:center; gap:14px;
+    }
+    .faq-ic {
+      width:22px; height:22px; border:1px solid rgba(255,255,255,.15);
+      border-radius:50%; display:flex; align-items:center; justify-content:center;
+      flex-shrink:0; font-size:13px; transition:all .25s;
+    }
+    .faq-item.open .faq-ic { background:var(--accent); border-color:var(--accent); color:var(--black); transform:rotate(45deg); }
+    .faq-a { max-height:0; overflow:hidden; transition:max-height .35s ease; font-size:14.5px; color:var(--gray-400); line-height:1.75; }
+    .faq-item.open .faq-a { max-height:300px; }
+    .faq-inner { padding-bottom:22px; }
+
+    /* ─── CTA BAND ───────────────────────────────────────────── */
+    .cta-band {
+      padding:100px 0; background:var(--accent);
+      position:relative; overflow:hidden;
+    }
+    .cta-band::before {
+      content:'3TABZ'; position:absolute;
+      font-family:var(--font-h); font-weight:800; font-size:240px;
+      color:rgba(0,0,0,.06); right:-10px; top:50%; transform:translateY(-50%);
+      white-space:nowrap; pointer-events:none; letter-spacing:-8px;
+    }
+    .cta-band .container { text-align:center; }
+    .cta-band h2 { color:var(--black); font-size:clamp(34px,5vw,62px); margin-bottom:12px; }
+    .cta-band .lead { color:rgba(0,0,0,.6); font-size:16.5px; margin-bottom:36px; max-width:500px; margin-left:auto; margin-right:auto; }
+    .cta-band .cta-buttons { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
+    .btn-black { background:var(--black); color:var(--white); padding:13px 26px; border-radius:2px; font-weight:600; font-size:14px; text-decoration:none; display:inline-flex; align-items:center; gap:9px; transition:background .2s; }
+    .btn-black:hover { background:#222; }
+    .btn-outline-dark { background:transparent; color:var(--black); border:1.5px solid rgba(0,0,0,.25); padding:13px 26px; border-radius:2px; font-weight:500; font-size:14px; text-decoration:none; display:inline-flex; align-items:center; gap:9px; transition:all .2s; }
+    .btn-outline-dark:hover { background:rgba(0,0,0,.07); }
+
+    /* ─── FOOTER ─────────────────────────────────────────────── */
+    footer {
+      background:var(--black); border-top:1px solid var(--border);
+      padding:56px 0 36px;
+    }
+    .ft {
+      display:grid; grid-template-columns:1.6fr 1fr 1fr 1fr;
+      gap:56px; margin-bottom:52px;
+    }
+    .ft-logo {
+      font-family:var(--font-h); font-weight:800;
+      font-size:19px; color:var(--white); margin-bottom:10px;
+    }
+    .ft-logo em { color:var(--accent); font-style:normal; }
+    .ft-tag { font-size:13px; color:var(--gray-400); max-width:200px; line-height:1.65; }
+    .ft-h { font-size:11.5px; font-weight:600; text-transform:uppercase; letter-spacing:1.5px; color:var(--white); margin-bottom:18px; }
+    .ft-links { list-style:none; }
+    .ft-links li { margin-bottom:11px; }
+    .ft-links a { font-size:13.5px; color:var(--gray-400); text-decoration:none; transition:color .2s; }
+    .ft-links a:hover { color:var(--white); }
+    .ft-bot {
+      border-top:1px solid var(--border); padding-top:24px;
+      display:flex; align-items:center; justify-content:space-between;
+    }
+    .ft-copy { font-size:12.5px; color:var(--gray-600); }
+    .ft-legal { display:flex; gap:20px; }
+    .ft-legal a { font-size:12.5px; color:var(--gray-600); text-decoration:none; transition:color .2s; }
+    .ft-legal a:hover { color:var(--white); }
+
+    /* ─── RESPONSIVE ─────────────────────────────────────────── */
+    @media (max-width:1024px) {
+      .feats-grid { grid-template-columns:repeat(2,1fr); }
+      .steps { grid-template-columns:repeat(2,1fr); }
+      .step-arr { display:none; }
+      .ft { grid-template-columns:1fr 1fr; gap:36px; }
+    }
+    @media (max-width:768px) {
+      .hero .container { grid-template-columns:1fr; gap:52px; }
+      .hero-vis { order:-1; }
+      .chip { display:none; }
+      .pain .container { grid-template-columns:1fr; }
+      .vs-inner { grid-template-columns:1fr; }
+      .feats-grid { grid-template-columns:1fr; }
+      .reviews { grid-template-columns:1fr; }
+      .pricing-cards { grid-template-columns:1fr; }
+      .steps { grid-template-columns:1fr; }
+      .cons-grid { grid-template-columns:1fr; }
+      .ft { grid-template-columns:1fr; }
+      .ft-bot { flex-direction:column; gap:14px; text-align:center; }
+      .nav-links { display:none; }
+      .nav-mob { display:flex; align-items:center; gap:10px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="container">
+    <a href="#" class="nav-logo">3TAB<em>Z</em></a>
+    <ul class="nav-links">
+      <li><a href="#features">Features</a></li>
+      <li><a href="#vs">Why 3TABZ</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#download" class="nav-cta">Download free</a></li>
+    </ul>
+    <div class="nav-mob">
+      <a href="#download" class="dl-btn dl-btn-ios" style="padding:7px 16px;font-size:12.5px;">Download</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="container">
+    <div class="hero-content">
+      <div class="badge rv"><span class="badge-dot"></span>Now available on iOS &amp; Android</div>
+      <h1 class="rv d1">
+        Your personal<br/>
+        <span class="ac">health manager.</span><br/>
+        Always on duty.
+      </h1>
+      <p class="hero-sub rv d2">
+        <strong>3TABZ</strong> tracks every dose, predicts when your conditions return, monitors your whole family's medications, and gives you AI-powered guidance, all in one app that works even offline. <strong>It's the health assistant you should have had years ago.</strong>
+      </p>
+      <div class="dl-group rv d3">
+        <a href="#download" class="dl-btn dl-btn-ios">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+          App Store
+        </a>
+        <a href="#download" class="dl-btn dl-btn-and">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.76c.2.11.44.12.65.03l12.65-7.07-2.77-2.77-10.53 9.81zM.66 1.48C.25 1.9 0 2.56 0 3.4v17.2c0 .84.25 1.5.67 1.91l.09.09 9.63-9.63v-.23L.75 3.4l-.09.08zM20.93 10.52l-2.79-1.56-3.09 3.09 3.09 3.09 2.81-1.57c.8-.45.8-1.62-.02-2.05zM3.18.24L15.83 7.3l-2.77 2.77L2.53.26c.21-.09.45-.08.65-.02z"/></svg>
+          Google Play
+        </a>
+      </div>
+      <div class="hero-trust rv">
+        <div class="trust-item">
+          <div class="trust-num">4.8★</div>
+          <div class="trust-label">App Store rating</div>
+        </div>
+        <div class="trust-item">
+          <div class="trust-num">50K+</div>
+          <div class="trust-label">Doses tracked</div>
+        </div>
+        <div class="trust-item">
+          <div class="trust-num">12+</div>
+          <div class="trust-label">Countries</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-vis rv d2">
+      <div class="phone-wrap">
+        <div class="chip">💊 Amoxicillin due in 12 min</div>
+        <div class="chip">📈 94% adherence this week</div>
+        <div class="chip">⚠️ Low stock — 3 doses left</div>
+        <div class="phone">
+          <div class="ph-status"><span>9:41</span><span>●●●</span></div>
+          <div class="ph-head">
+            <div class="ph-date">Thursday, 4 April</div>
+            <div class="ph-title"><span>Kyle's Meds</span><span class="ph-adh">94% ↑</span></div>
+          </div>
+          <div class="ph-row">
+            <div class="ph-stat"><div class="ph-sn">91%</div><div class="ph-sl">Weekly</div></div>
+            <div class="ph-stat"><div class="ph-sn">2</div><div class="ph-sl">Left today</div></div>
+            <div class="ph-stat"><div class="ph-sn">0</div><div class="ph-sl">Missed</div></div>
+          </div>
+          <div class="ph-next">
+            <div><div class="ph-nl">Next dose</div><div class="ph-nm">Amoxicillin</div></div>
+            <div class="ph-nt">in 12 min</div>
+          </div>
+          <div class="ph-sec">Today's Schedule</div>
+          <div class="ph-card">
+            <div><div class="ph-mn">Paracetamol 500mg</div><div class="ph-md">Fever · 08:00</div></div>
+            <div class="ph-chk ok"></div>
+          </div>
+          <div class="ph-card">
+            <div><div class="ph-mn">Amoxicillin 250mg</div><div class="ph-md">Infection · 09:45</div></div>
+            <div class="ph-chk"></div>
+          </div>
+          <div class="ph-card">
+            <div><div class="ph-mn">Vitamin D3 1000IU</div><div class="ph-md">General · 12:00</div></div>
+            <div class="ph-chk"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PAIN STRIP -->
+<section class="pain">
+  <div class="container">
+    <div class="pain-item rv">
+      <span class="pain-emoji">⚠️</span>
+      <div class="pain-head">Missed doses kill treatment</div>
+      <div class="pain-body">Studies show 50% of chronic illness patients don't take medications as prescribed. Each missed dose doesn't just delay recovery, it can lead to resistance, relapse, and hospitalisation.</div>
+      <div class="pain-stat">→ 125,000 deaths annually from medication non-adherence in the US alone</div>
+    </div>
+    <div class="pain-item rv d1">
+      <span class="pain-emoji">🧠</span>
+      <div class="pain-head">Your memory was never designed for this</div>
+      <div class="pain-body">Managing medications for yourself, a child, and an elderly parent — with different doses, timings, and refill dates is an impossible cognitive load. Without a dedicated system, things fall through.</div>
+      <div class="pain-stat">→ Average person manages 4+ medications across their household</div>
+    </div>
+    <div class="pain-item rv d2">
+      <span class="pain-emoji">📱</span>
+      <div class="pain-head">Other apps are failing you</div>
+      <div class="pain-body">Basic reminder apps just ping you, they don't track adherence, predict recurring conditions, or give you guidance. They're alarms, not managers. You need something that actually understands your health.</div>
+      <div class="pain-stat">→ 70% of users abandon medication apps within 30 days due to poor design</div>
+    </div>
+  </div>
+</section>
+
+<!-- VS SECTION -->
+<section class="vs" id="vs">
+  <div class="container">
+    <span class="tag rv">Why 3TABZ wins</span>
+    <h2 class="rv">We're not just better.<br/>We're in a different category.</h2>
+    <p class="sub rv">Every other medication app gives you a to-do list. 3TABZ gives you a health manager.</p>
+    <div class="vs-inner rv">
+      <div class="vs-col">
+        <div class="vs-label us"><span class="vs-dot us"></span>3TABZ</div>
+        <div class="vs-row win"><span class="vs-icon">✅</span>AI guidance personalised to your exact medications and conditions daily</div>
+        <div class="vs-row win"><span class="vs-icon">✅</span>Predicts when recurring conditions will return — before they happen</div>
+        <div class="vs-row win"><span class="vs-icon">✅</span>Full family management — one app, multiple profiles, zero confusion</div>
+        <div class="vs-row win"><span class="vs-icon">✅</span>Works 100% offline — every action syncs automatically when back online</div>
+        <div class="vs-row win"><span class="vs-icon">✅</span>Adherence charts with streaks, trends and missed dose history</div>
+        <div class="vs-row win"><span class="vs-icon">✅</span>Inventory tracking with automatic low-stock alerts before you run out</div>
+        <div class="vs-row win"><span class="vs-icon">✅</span>AI drug interaction checker across all your medications</div>
+        <div class="vs-row win"><span class="vs-icon">✅</span>Temperature logging correlated to your medication history</div>
+        <div class="vs-row win"><span class="vs-icon">✅</span>Barcode scanner — add medications by scanning the box</div>
+        <div class="vs-row win"><span class="vs-icon">✅</span>Doctor-ready PDF report of your medication history</div>
+      </div>
+      <div class="vs-col them">
+        <div class="vs-label them"><span class="vs-dot them"></span>Other apps</div>
+        <div class="vs-row lose"><span class="vs-icon">❌</span>Generic tips not based on your actual medications</div>
+        <div class="vs-row lose"><span class="vs-icon">❌</span>No prediction — you get blindsided every time a condition returns</div>
+        <div class="vs-row lose"><span class="vs-icon">❌</span>Either one person only, or clunky caregiver bolt-ons</div>
+        <div class="vs-row lose"><span class="vs-icon">❌</span>Requires internet — misses doses offline</div>
+        <div class="vs-row lose"><span class="vs-icon">❌</span>Basic streak counter at best, no real analytics</div>
+        <div class="vs-row lose"><span class="vs-icon">❌</span>No inventory awareness — you find out when you open the bottle</div>
+        <div class="vs-row lose"><span class="vs-icon">❌</span>No interaction checking — you have to google it yourself</div>
+        <div class="vs-row lose"><span class="vs-icon">❌</span>No temperature or biometric correlation</div>
+        <div class="vs-row lose"><span class="vs-icon">❌</span>Manual entry only — slow and error-prone</div>
+        <div class="vs-row lose"><span class="vs-icon">❌</span>No report — you have to reconstruct your history from memory</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="feats" id="features">
+  <div class="container">
+    <div class="feats-head">
+      <span class="tag rv">What 3TABZ does</span>
+      <h2 class="rv">Ten things your health needs.<br/>All in one place.</h2>
+      <p class="sub rv">Built around how people actually manage medications — not how apps assume they do.</p>
+    </div>
+    <div class="feats-grid rv">
+      <div class="fc">
+        <div class="fc-n">01</div>
+        <span class="fc-icon">📁</span>
+        <div class="fc-title">Smart Collections</div>
+        <div class="fc-body">Create separate medication profiles for every person you care for — yourself, your children, your parents. Switch between them instantly. Everything stays cleanly separated.</div>
+        <div class="fc-edge">No other app handles multi-person management this cleanly.</div>
+      </div>
+      <div class="fc">
+        <span class="fc-pro">PRO</span>
+        <div class="fc-n">02</div>
+        <span class="fc-icon">📊</span>
+        <div class="fc-title">Adherence Analytics</div>
+        <div class="fc-body">Daily, weekly, and 30-day adherence charts with streaks, missed dose history, and trend analysis. See exactly where you're slipping and course-correct.</div>
+        <div class="fc-edge">Turn health data into a feedback loop, not just a log.</div>
+      </div>
+      <div class="fc">
+        <span class="fc-pro">PRO</span>
+        <div class="fc-n">03</div>
+        <span class="fc-icon">🤖</span>
+        <div class="fc-title">AI Health Guidance</div>
+        <div class="fc-body">Personalised daily guidance generated from your actual medication list and conditions. Not generic advice from the internet but real context, real suggestions, powered by GPT-4.</div>
+        <div class="fc-edge">Like having a health advisor in your pocket, 24/7.</div>
+      </div>
+      <div class="fc">
+        <span class="fc-pro">PRO</span>
+        <div class="fc-n">04</div>
+        <span class="fc-icon">🔮</span>
+        <div class="fc-title">Occurrence Prediction</div>
+        <div class="fc-body">3TABZ learns your health patterns from your logged data. Before a recurring condition returns, you see predicted time windows with confidence scores so you prepare, not panic.</div>
+        <div class="fc-edge">No other consumer health app offers this.</div>
+      </div>
+      <div class="fc">
+        <div class="fc-n">05</div>
+        <span class="fc-icon">📦</span>
+        <div class="fc-title">Inventory Management</div>
+        <div class="fc-body">Track the exact number of doses remaining for every medication. Low stock alerts fire automatically. Never run out mid-course or make an emergency pharmacy trip.</div>
+        <div class="fc-edge">Know your supply before it becomes a crisis.</div>
+      </div>
+      <div class="fc">
+        <div class="fc-n">06</div>
+        <span class="fc-icon">📶</span>
+        <div class="fc-title">Full Offline Support</div>
+        <div class="fc-body">Mark doses, log temperatures, update inventory. Everything works without internet. Actions queue automatically and sync the moment you're back online. Your health doesn't pause for bad wifi.</div>
+        <div class="fc-edge">Critical for users in low-connectivity areas.</div>
+      </div>
+      <div class="fc">
+        <span class="fc-pro">PRO</span>
+        <div class="fc-n">07</div>
+        <span class="fc-icon">⚗️</span>
+        <div class="fc-title">Drug Interaction Checker</div>
+        <div class="fc-body">Taking multiple medications? 3TABZ checks your entire list for known interactions and surfaces warnings before they become dangerous. No more googling combinations at midnight.</div>
+        <div class="fc-edge">Your pharmacist, automated.</div>
+      </div>
+      <div class="fc">
+        <div class="fc-n">08</div>
+        <span class="fc-icon">🌡️</span>
+        <div class="fc-title">Temperature Logging</div>
+        <div class="fc-body">Log body temperature before and after doses. Over time you see exactly how your medications are affecting your body and share that timeline directly with your doctor.</div>
+        <div class="fc-edge">Data that turns appointments into real conversations.</div>
+      </div>
+      <div class="fc">
+        <div class="fc-n">09</div>
+        <span class="fc-icon">📄</span>
+        <div class="fc-title">Doctor Reports</div>
+        <div class="fc-body">Generate a clean PDF of your medication history, adherence rate, temperature logs and timeline. Walk into any appointment with your full health story no memory required.</div>
+        <div class="fc-edge">Doctors will know you take your health seriously.</div>
+      </div>
+      <div class="fc">
+        <span class="fc-pro">PRO</span>
+        <div class="fc-n">10</div>
+        <span class="fc-icon">🧬</span>
+        <div class="fc-title">Risk Score</div>
+        <div class="fc-body">A real-time health risk score computed from your adherence data, missed doses, and occurrence patterns. Know your current risk level and what's driving it before it shows up at the doctor.</div>
+        <div class="fc-edge">Proactive health, not reactive.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONSEQUENCES -->
+<section class="consequences">
+  <div class="container">
+    <span class="tag rv">The stakes are real</span>
+    <h2 class="rv">What you lose when you don't have 3TABZ.</h2>
+    <p class="sub rv">This isn't about an app. It's about what happens to your health without the right system.</p>
+    <div class="cons-grid rv">
+      <div class="cons-card">
+        <div class="cons-header"><span>⚠️</span>Without 3TABZ</div>
+        <ul class="cons-list">
+          <li>You miss doses because life gets busy and miss the whole course</li>
+          <li>Your condition comes back because you didn't see it coming</li>
+          <li>You run out of medication mid-treatment with no warning</li>
+          <li>You take two medications that interact badly and don't know until symptoms appear</li>
+          <li>Your doctor asks about your medication history, you guess</li>
+          <li>You manage your child's and parent's medications in separate apps or on paper</li>
+          <li>You don't know if your treatment is actually working</li>
+          <li>You pay for doctor visits that better data could have prevented</li>
+        </ul>
+      </div>
+      <div class="cons-card positive">
+        <div class="cons-header"><span>✅</span>With 3TABZ</div>
+        <ul class="cons-list">
+          <li>Smart reminders and a real-time schedule mean every dose is accounted for</li>
+          <li>Occurrence prediction tells you days ahead when a condition is likely to return</li>
+          <li>Low-stock alerts fire automatically — you refill before you run out</li>
+          <li>Drug interaction checks scan your entire medication list instantly</li>
+          <li>A full medication history and adherence report, ready for any appointment</li>
+          <li>One app, every person you care for — perfectly separated, instantly switchable</li>
+          <li>Adherence charts show week-by-week trends so you know treatment is working</li>
+          <li>AI guidance daily, personalised to your exact medications and conditions</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how" id="how">
+  <div class="container">
+    <span class="tag rv">Simple by design</span>
+    <h2 class="rv">Running in under two minutes.</h2>
+    <div class="steps">
+      <div class="step rv">
+        <div class="step-bg">01</div>
+        <div class="step-dot">📱</div>
+        <div class="step-title">Create your account</div>
+        <div class="step-body">Sign up in seconds. Your data is encrypted end-to-end and stored securely. You own it — export or delete it any time.</div>
+        <span class="step-arr">→</span>
+      </div>
+      <div class="step rv d1">
+        <div class="step-bg">02</div>
+        <div class="step-dot">📁</div>
+        <div class="step-title">Create a collection</div>
+        <div class="step-body">Add a collection for each person — yourself, your child, your parent. Give it a name and colour. Takes 10 seconds.</div>
+        <span class="step-arr">→</span>
+      </div>
+      <div class="step rv d2">
+        <div class="step-bg">03</div>
+        <div class="step-dot">💊</div>
+        <div class="step-title">Add your medications</div>
+        <div class="step-body">Scan the barcode or type the name. Add dosage, schedule, and illness. Set reminders. 30 seconds per medication.</div>
+        <span class="step-arr">→</span>
+      </div>
+      <div class="step rv d3">
+        <div class="step-bg">04</div>
+        <div class="step-dot">✓</div>
+        <div class="step-title">Track. Improve. Recover.</div>
+        <div class="step-body">One tap to mark a dose taken. Watch your adherence score climb. Let the AI work in the background. Get better faster.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOCIAL PROOF -->
+<section class="proof">
+  <div class="container">
+    <div style="text-align:center">
+      <span class="tag rv">Real users, real results</span>
+      <h2 class="rv">People who have been through it.</h2>
+    </div>
+    <div class="reviews">
+      <div class="rev rv">
+        <div class="rev-stars">★★★★★</div>
+        <p class="rev-text">"I manage medications for my mum and my son at the same time. 3TABZ is the first app that makes this <em>genuinely manageable</em>. I don't know how I did it before. The collections feature alone makes every other app obsolete."</p>
+        <div class="rev-foot">
+          <div class="rev-av">👩</div>
+          <div><div class="rev-name">Adaeze O.</div><div class="rev-meta">Caregiver · Lagos, Nigeria</div></div>
+        </div>
+      </div>
+      <div class="rev rv d1">
+        <div class="rev-stars">★★★★★</div>
+        <p class="rev-text">"The occurrence prediction is <em>genuinely uncanny</em>. It told me my migraines tend to return every 18 days. It was right. Now I prepare in advance instead of getting blindsided at work. This feature alone is worth the subscription."</p>
+        <div class="rev-foot">
+          <div class="rev-av">👨</div>
+          <div><div class="rev-name">Marcus T.</div><div class="rev-meta">Pro subscriber · London, UK</div></div>
+        </div>
+      </div>
+      <div class="rev rv d2">
+        <div class="rev-stars">★★★★★</div>
+        <p class="rev-text">"I've used six different medication apps over five years. Most are either too basic or frustratingly complex. 3TABZ is the first that feels like it was built for real people. <em>The AI suggestions actually know what I'm taking</em> — that's rare."</p>
+        <div class="rev-foot">
+          <div class="rev-av">🧑</div>
+          <div><div class="rev-name">Priya K.</div><div class="rev-meta">Verified user · Mumbai, India</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing" id="pricing">
+  <div class="container">
+    <div style="text-align:center">
+      <span class="tag rv">Transparent pricing</span>
+      <h2 class="rv">Free forever. More power<br/>when you're ready.</h2>
+      <p class="sub rv" style="margin:0 auto">Start free today. Upgrade any time for AI features and advanced analytics. Less than a cup of coffee a month.</p>
+    </div>
+    <div class="pricing-cards rv">
+      <div class="pc">
+        <div class="pc-name">Free</div>
+        <div class="pc-price">$0</div>
+        <div class="pc-per">Forever free · No credit card</div>
+        <ul class="pc-feats">
+          <li>Unlimited collections</li>
+          <li>Add &amp; track all medications</li>
+          <li>Smart dose reminders</li>
+          <li>Inventory management</li>
+          <li>Temperature logging</li>
+          <li>When-last tracking</li>
+          <li>Barcode scanner</li>
+          <li>Offline sync</li>
+          <li class="no">Adherence charts</li>
+          <li class="no">AI health guidance</li>
+          <li class="no">Occurrence prediction</li>
+          <li class="no">Drug interaction checker</li>
+          <li class="no">Risk score</li>
+        </ul>
+        <a href="#download" class="pc-btn pc-btn-free">Get started free</a>
+      </div>
+      <div class="pc hot">
+        <div class="pc-badge">MOST POPULAR</div>
+        <div class="pc-name">Pro</div>
+        <div class="pc-price"><sup>$</sup>2.99</div>
+        <div class="pc-per">per month · Cancel any time</div>
+        <ul class="pc-feats">
+          <li>Everything in Free</li>
+          <li>Adherence charts (7 / 14 / 30 days)</li>
+          <li>AI health guidance daily</li>
+          <li>AI medication guide</li>
+          <li>Occurrence prediction</li>
+          <li>AI adherence analysis</li>
+          <li>Drug interaction checker</li>
+          <li>Real-time risk score</li>
+          <li>Doctor PDF reports</li>
+          <li>Priority support</li>
+        </ul>
+        <a href="#download" class="pc-btn pc-btn-pro">Start Pro — $2.99/mo</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq" id="faq">
+  <div class="container">
+    <div style="text-align:center">
+      <span class="tag rv">Questions</span>
+      <h2 class="rv">Everything you need to know.</h2>
+    </div>
+    <div class="faq-list rv">
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Is my health data private and secure? <span class="faq-ic">+</span></button>
+        <div class="faq-a"><div class="faq-inner">Your health data is encrypted at rest and in transit using industry-standard encryption. We never sell your data to advertisers or third parties — ever. You can export your complete data or permanently delete your account at any time from the Privacy &amp; Data section in the app.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Does 3TABZ work without internet? <span class="faq-ic">+</span></button>
+        <div class="faq-a"><div class="faq-inner">Yes — fully. 3TABZ has a built-in offline queue. Any action you take without internet (marking doses taken, logging temperature, updating inventory) is automatically synced the moment connectivity is restored. Your health routine should never depend on your wifi signal.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Can I manage medications for my whole family? <span class="faq-ic">+</span></button>
+        <div class="faq-a"><div class="faq-inner">Absolutely. Collections let you create completely separate medication profiles for each person — yourself, your children, your parents, anyone you care for. You switch between them instantly with one tap, and everything is kept cleanly separated. No confusion, no cross-contamination of data.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">How does occurrence prediction work? <span class="faq-ic">+</span></button>
+        <div class="faq-a"><div class="faq-inner">3TABZ analyses your logged occurrence history — every time you've recorded a condition returning and identifies patterns in frequency and timing. It then generates a predicted time window for when that condition is likely to recur, with a confidence score based on the strength of the pattern. The more data you log, the more accurate it becomes.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Is the AI guidance safe? Is it medical advice? <span class="faq-ic">+</span></button>
+        <div class="faq-a"><div class="faq-inner">AI guidance is generated using your medication list and conditions as context, powered by GPT-4. All suggestions are clearly marked as informational and are not a substitute for advice from a qualified healthcare provider. You can flag any suggestion as unhelpful or inaccurate, and we review flagged content regularly.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Is 3TABZ available on both iOS and Android? <span class="faq-ic">+</span></button>
+        <div class="faq-a"><div class="faq-inner">Yes. 3TABZ is available on the Apple App Store and Google Play Store. Your data syncs across all devices when you're signed into the same account — switch from iPhone to Android and everything is exactly where you left it.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">What if I want to cancel Pro? <span class="faq-ic">+</span></button>
+        <div class="faq-a"><div class="faq-inner">You can cancel Pro at any time from within the app or from your App Store / Google Play subscription settings. You keep Pro features until the end of your billing period. Your data is never deleted when you downgrade — you always retain your full history on the Free plan.</div></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<section class="cta-band" id="download">
+  <div class="container">
+    <h2 class="rv">Your health deserves<br/>a real manager.</h2>
+    <p class="lead rv">Download 3TABZ free today. Takes two minutes to set up. The rest takes care of itself.</p>
+    <div class="cta-buttons rv">
+      <a href="#" class="btn-black">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+        Download for iOS
+      </a>
+      <a href="#" class="btn-outline-dark">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.76c.2.11.44.12.65.03l12.65-7.07-2.77-2.77-10.53 9.81zM.66 1.48C.25 1.9 0 2.56 0 3.4v17.2c0 .84.25 1.5.67 1.91l.09.09 9.63-9.63v-.23L.75 3.4l-.09.08zM20.93 10.52l-2.79-1.56-3.09 3.09 3.09 3.09 2.81-1.57c.8-.45.8-1.62-.02-2.05zM3.18.24L15.83 7.3l-2.77 2.77L2.53.26c.21-.09.45-.08.65-.02z"/></svg>
+        Download for Android
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="ft">
+      <div>
+        <div class="ft-logo">3TAB<em>Z</em></div>
+        <p class="ft-tag">The health manager for you and everyone you care for.</p>
+      </div>
+      <div>
+        <div class="ft-h">Product</div>
+        <ul class="ft-links">
+          <li><a href="#features">Features</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#how">How it works</a></li>
+          <li><a href="#download">Download</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="ft-h">Company</div>
+        <ul class="ft-links">
+          <li><a href="#">About</a></li>
+          <li><a href="mailto:support@3tabz.com">Contact</a></li>
+          <li><a href="support.html">Help &amp; Support</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="ft-h">Legal</div>
+        <ul class="ft-links">
+          <li><a href="privacy.html">Privacy Policy</a></li>
+          <li><a href="terms.html">Terms of Service</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="ft-bot">
+      <div class="ft-copy">© 2025 3TABZ. All rights reserved.</div>
+      <div class="ft-legal">
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+        <a href="support.html">Support</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Nav scroll
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // Scroll reveal
+  const ro = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('in'); ro.unobserve(e.target); }
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.rv').forEach(el => ro.observe(el));
+
+  // FAQ
+  function toggleFaq(btn) {
+    const item = btn.closest('.faq-item');
+    const wasOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+    if (!wasOpen) item.classList.add('open');
+  }
+
+  // Active nav highlight
+  const sections = document.querySelectorAll('section[id]');
+  const links = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let cur = '';
+    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 130) cur = s.id; });
+    links.forEach(a => {
+      a.style.color = a.getAttribute('href') === '#' + cur ? 'var(--white)' : '';
+    });
+  });
+
+  // Phone check animation
+  const checks = document.querySelectorAll('.ph-chk:not(.ok)');
+  let ci = 0;
+  setInterval(() => {
+    checks.forEach(c => c.classList.remove('ok'));
+    if (checks[ci]) checks[ci].classList.add('ok');
+    ci = (ci + 1) % checks.length;
+  }, 2400);
+</script>
+</body>
+</html>
