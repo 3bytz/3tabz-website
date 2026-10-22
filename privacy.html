@@ -5,390 +5,374 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Privacy Policy — 3TABZ</title>
   <meta name="description" content="3TABZ Privacy Policy. How we collect, use, and protect your health data." />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; base-uri 'self'" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="shortcut icon" href="appicon2.png" type="image/x-icon">
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --black: #0a0a0a; --white: #fafafa;
-      --gray-100: #f5f5f5; --gray-200: #e5e5e5;
-      --gray-400: #a3a3a3; --gray-600: #525252;
-      --accent: #c8f135; --accent-dark: #a8d015;
-      --font-display: 'Syne', sans-serif;
-      --font-body: 'DM Sans', sans-serif;
-    }
-    html { scroll-behavior: smooth; }
-    body {
-      background: var(--black); color: var(--white);
-      font-family: var(--font-body); font-weight: 300;
-      line-height: 1.7; overflow-x: hidden;
-    }
-    body::before {
-      content: ''; position: fixed; inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-      pointer-events: none; z-index: 0;
-    }
-    .container { max-width: 100%; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
-
-    /* NAV */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      padding: 20px 0; background: rgba(10,10,10,0.88);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-    }
-    nav .container { max-width: 100%; display: flex; align-items: center; justify-content: space-between; }
-    .nav-logo {
-      font-family: var(--font-display); font-weight: 800;
-      font-size: 22px; letter-spacing: -0.5px;
-      color: var(--white); text-decoration: none;
-    }
-    .nav-logo span { color: var(--accent); }
-    .nav-back {
-      font-size: 13px; color: var(--gray-400); text-decoration: none;
-      display: flex; align-items: center; gap: 6px; transition: color 0.2s;
-    }
-    .nav-back:hover { color: var(--white); }
-    .nav-back svg { width: 14px; height: 14px; }
-
-    /* HERO BAND */
-    .page-hero {
-      padding: 140px 0 60px;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-      margin-bottom: 64px;
-    }
-    .page-badge {
-      display: inline-flex; align-items: center; gap: 8px;
-      border: 1px solid rgba(200,241,53,0.3);
-      padding: 6px 14px; font-size: 11px; letter-spacing: 0.12em;
-      text-transform: uppercase; color: var(--accent); margin-bottom: 24px;
-    }
-    .page-badge svg { width: 12px; height: 12px; }
-    h1 {
-      font-family: var(--font-display); font-weight: 800;
-      font-size: clamp(36px, 6vw, 56px); line-height: 1.05;
-      letter-spacing: -1.5px; margin-bottom: 20px;
-    }
-    .page-meta { font-size: 13px; color: var(--gray-600); }
-
-    /* CONTENT */
-    .doc-body { padding-bottom: 100px; }
-
-    .toc {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.07);
-      border-left: 2px solid var(--accent);
-      padding: 24px 28px; margin-bottom: 56px;
-    }
-    .toc-title {
-      font-family: var(--font-display); font-size: 11px;
-      letter-spacing: 0.12em; text-transform: uppercase;
-      color: var(--gray-600); margin-bottom: 16px;
-    }
-    .toc ol { padding-left: 18px; }
-    .toc li { margin-bottom: 8px; }
-    .toc a { color: var(--gray-400); text-decoration: none; font-size: 14px; transition: color 0.2s; }
-    .toc a:hover { color: var(--accent); }
-
-    .doc-section { margin-bottom: 52px; }
-    .doc-section h2 {
-      font-family: var(--font-display); font-weight: 700;
-      font-size: 22px; letter-spacing: -0.3px;
-      margin-bottom: 20px; padding-bottom: 12px;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-      color: var(--white);
-    }
-    .section-num {
-      color: var(--accent); margin-right: 8px; font-size: 14px;
-    }
-    .doc-section p { color: var(--gray-400); margin-bottom: 16px; font-size: 15px; }
-    .doc-section p:last-child { margin-bottom: 0; }
-    .doc-section ul, .doc-section ol {
-      color: var(--gray-400); padding-left: 20px;
-      margin-bottom: 16px; font-size: 15px;
-    }
-    .doc-section li { margin-bottom: 8px; }
-
-    .highlight-box {
-      background: rgba(200,241,53,0.05);
-      border: 1px solid rgba(200,241,53,0.15);
-      padding: 20px 24px; margin: 24px 0;
-    }
-    .highlight-box p { color: var(--white) !important; font-size: 14px !important; }
-    .highlight-box strong { color: var(--accent); }
-
-    .data-table {
-      width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 14px;
-    }
-    .data-table th {
-      text-align: left; padding: 10px 16px;
-      background: rgba(255,255,255,0.04);
-      color: var(--gray-400); font-weight: 500;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-      font-family: var(--font-display); font-size: 11px;
-      letter-spacing: 0.08em; text-transform: uppercase;
-    }
-    .data-table td {
-      padding: 12px 16px; color: var(--gray-400);
-      border-bottom: 1px solid rgba(255,255,255,0.04);
-      vertical-align: top;
-    }
-    .data-table tr:last-child td { border-bottom: none; }
-
-    /* CONTACT CTA */
-    .contact-cta {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.08);
-      padding: 36px; text-align: center; margin: 60px 0 0;
-    }
-    .contact-cta h3 {
-      font-family: var(--font-display); font-weight: 700;
-      font-size: 20px; margin-bottom: 10px;
-    }
-    .contact-cta p { color: var(--gray-400); font-size: 14px; margin-bottom: 20px; }
-    .contact-cta a.btn {
-      display: inline-block; background: var(--accent); color: var(--black);
-      padding: 12px 28px; font-weight: 600; font-size: 14px;
-      text-decoration: none; font-family: var(--font-display);
-      transition: background 0.2s;
-    }
-    .contact-cta a.btn:hover { background: var(--accent-dark); }
-
-    /* FOOTER */
-    footer {
-      border-top: 1px solid rgba(255,255,255,0.06);
-      padding: 32px 0; text-align: center;
-    }
-    footer .container { max-width: 1200px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
-    .footer-copy { font-size: 13px; color: var(--gray-600); }
-    .footer-legal { display: flex; gap: 24px; }
-    .footer-legal a { font-size: 13px; color: var(--gray-600); text-decoration: none; transition: color 0.2s; }
-    .footer-legal a:hover { color: var(--white); }
-
-    @media (max-width: 600px) {
-      footer .container { flex-direction: column; text-align: center; }
-    }
-  </style>
+  <link rel="icon" href="/favicon.png" type="image/png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/site.css" />
 </head>
 <body>
-
   <nav>
     <div class="container">
-      <a href="index.html" class="nav-logo">3TAB<span>Z</span></a>
-      <a href="index.html" class="nav-back">
-        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
-        Back to home
-      </a>
+      <a href="/" class="nav-logo"><img src="/favicon.png" alt="" width="34" height="34" />3TABZ</a>
+      <a href="/" class="nav-back"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg> Back to home</a>
     </div>
   </nav>
 
   <div class="page-hero">
-    <div class="container">
-      <div class="page-badge">
-        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
-        Legal
-      </div>
+    <div class="container narrow">
+      <div class="page-badge"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>Legal</div>
       <h1>Privacy Policy</h1>
-      <p class="page-meta">Effective date: 1 January 2025 &nbsp;·&nbsp; Last updated: March 2026</p>
+      <p class="page-meta">Version 2026-10-16 &nbsp;·&nbsp; Applies to the 3TABZ app, API and website</p>
     </div>
   </div>
 
   <div class="doc-body">
-    <div class="container">
-
+    <div class="container narrow">
+<div class="alert"><strong>Emergency?</strong> Call your local emergency number now (for example <a href="tel:911">911</a> in the US and Canada, <a href="tel:999">999</a> in the UK, <a href="tel:112">112</a> in the EU and Nigeria) or go to the nearest hospital. 3TABZ is not an emergency or medical service.</div>
+<div class="draft-note"><p><strong>Draft for legal review — version 2026-10-16.</strong> Text in [brackets] must be completed by 3tabz before publishing.
+This policy describes exactly what the 3TABZ app (v1.0.0), API and admin tools do as built. If the product changes, update this policy first.</p></div>
+<p><strong>Controller:</strong> 3tabz, a company registered in Nigeria, RC [RC NUMBER], [REGISTERED ADDRESS].
+<strong>Data Protection Officer:</strong> [DPO NAME], dpo@3tabz.com · General privacy questions: privacy@3tabz.com</p>
       <div class="toc">
         <div class="toc-title">Contents</div>
         <ol>
-          <li><a href="#s1">Information we collect</a></li>
-          <li><a href="#s2">How we use your information</a></li>
-          <li><a href="#s3">Data storage and security</a></li>
-          <li><a href="#s4">Data sharing and third parties</a></li>
-          <li><a href="#s5">Your rights</a></li>
-          <li><a href="#s6">Children's privacy</a></li>
-          <li><a href="#s7">Data retention</a></li>
-          <li><a href="#s8">International transfers</a></li>
-          <li><a href="#s9">Changes to this policy</a></li>
-          <li><a href="#s10">Contact us</a></li>
+          <li><a href="#s1">Summary</a></li>
+          <li><a href="#s2">What we collect and why</a></li>
+          <li><a href="#s3">AI features (optional)</a></li>
+          <li><a href="#s4">Who we share data with (service providers)</a></li>
+          <li><a href="#s5">International transfers</a></li>
+          <li><a href="#s6">How long we keep data</a></li>
+          <li><a href="#s7">Your rights (NDPA s.34–38)</a></li>
+          <li><a href="#s8">Security</a></li>
+          <li><a href="#s9">Children</a></li>
+          <li><a href="#s10">Notifications on shared phones</a></li>
+          <li><a href="#s11">Changes</a></li>
+          <li><a href="#s12">Contact</a></li>
+          <li><a href="#s13">Retention schedule</a></li>
         </ol>
       </div>
 
-      <div class="highlight-box">
-        <p><strong>The short version:</strong> Your health data is yours. We never sell it, never share it with advertisers or insurance companies, and we encrypt it at rest and in transit. You can export or delete everything at any time.</p>
-      </div>
-
       <div class="doc-section" id="s1">
-        <h2><span class="section-num">01</span>Information we collect</h2>
-        <p>We collect only the data needed to provide the 3TABZ service. We do not collect data for advertising purposes.</p>
-        <table class="data-table">
-          <thead>
-            <tr><th>Category</th><th>What we collect</th><th>Why</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong style="color:var(--white)">Account</strong></td>
-              <td>Email address, full name, password (hashed)</td>
-              <td>Authentication and account management</td>
-            </tr>
-            <tr>
-              <td><strong style="color:var(--white)">Health data</strong></td>
-              <td>Medications, doses, schedules, logs, temperature readings, illness history, occurrence records</td>
-              <td>Core app functionality</td>
-            </tr>
-            <tr>
-              <td><strong style="color:var(--white)">Device</strong></td>
-              <td>Push notification token, device platform (iOS/Android)</td>
-              <td>Sending reminders and alerts</td>
-            </tr>
-            <tr>
-              <td><strong style="color:var(--white)">Usage</strong></td>
-              <td>Anonymous feature usage, crash reports</td>
-              <td>Improving reliability and performance</td>
-            </tr>
-            <tr>
-              <td><strong style="color:var(--white)">AI interactions</strong></td>
-              <td>Medication queries sent to AI features</td>
-              <td>Generating personalised guidance</td>
-            </tr>
-          </tbody>
-        </table>
-        <p>We do not collect your precise GPS location, contacts, camera, microphone, or any data unrelated to medication management.</p>
+        <h2><span class="section-num">01</span>Summary</h2>
+<ul>
+<li>3TABZ helps you manage medicines and keep a health diary. It does <strong>not</strong> diagnose, treat or provide telemedicine.</li>
+<li>We collect the health information <strong>you</strong> enter so the app can work. We do not sell it, use it for advertising, or show ads.</li>
+<li>AI features are <strong>off</strong> unless you turn them on. When on, we send only the minimum de-identified details needed.</li>
+<li>You can export your data or delete your account in the app at any time (Profile → Privacy &amp; Data).</li>
+</ul>
       </div>
 
       <div class="doc-section" id="s2">
-        <h2><span class="section-num">02</span>How we use your information</h2>
-        <p>We use your information exclusively to:</p>
-        <ul>
-          <li>Provide, maintain, and improve the 3TABZ app</li>
-          <li>Send medication reminders and health alerts you have configured</li>
-          <li>Generate AI-powered medication guidance (processed by OpenAI on your behalf)</li>
-          <li>Detect and prevent fraud, abuse, or security incidents</li>
-          <li>Comply with legal obligations</li>
-          <li>Respond to your support requests</li>
-        </ul>
-        <p>We do not use your health data to build advertising profiles, infer insurance risk, or train AI models without your explicit, separate consent.</p>
+        <h2><span class="section-num">02</span>What we collect and why</h2>
+<div class="table-wrap"><table class="data-table">
+<thead>
+<tr>
+<th>Data</th>
+<th>Examples</th>
+<th>Why we use it</th>
+<th>Legal basis (NDPA 2023)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Account details</td>
+<td>name, email, password (stored only as a one-way hash), timezone, country, language</td>
+<td>create and secure your account, send verification and safety emails</td>
+<td>contract (s.25(1)(b))</td>
+</tr>
+<tr>
+<td>Age confirmation</td>
+<td>that you confirmed you are 18+</td>
+<td>accounts are for adults; children are managed by a parent as dependants</td>
+<td>legal obligation / contract</td>
+</tr>
+<tr>
+<td><strong>Health information</strong> (sensitive personal data, s.65)</td>
+<td>medicines, doses, schedules, dose logs, refills, symptoms, readings (temperature, blood pressure, sugar, SpO₂), check-ins (mood, pain, sleep, water, period), conditions/collection names, meal-plan answers, notes</td>
+<td>provide reminders, logs, reports, patterns, safety checks and meal plans</td>
+<td>your consent (s.30(1)(a)), given at sign-up and withdrawable</td>
+</tr>
+<tr>
+<td>Dependants' information</td>
+<td>name, relationship, their medicines</td>
+<td>caregiver mode, entered by a parent/guardian</td>
+<td>consent of the parent/guardian (s.31)</td>
+</tr>
+<tr>
+<td>Care-partner links</td>
+<td>partner email, permissions, alert delay</td>
+<td>send the alerts you choose to people you invite</td>
+<td>your consent</td>
+</tr>
+<tr>
+<td>Device &amp; technical data</td>
+<td>push token, app version, platform, phone manufacturer, notification permission state, which notification types you open, IP address in server logs</td>
+<td>deliver reminders and notifications, fix reliability problems, security</td>
+<td>legitimate interests (s.25(1)(f)) / contract</td>
+</tr>
+<tr>
+<td>Purchases</td>
+<td>store, product, renewal status, expiry, signed purchase proof</td>
+<td>provide Pro and prevent fraud</td>
+<td>contract; legal obligation (tax/records)</td>
+</tr>
+<tr>
+<td>Approximate location</td>
+<td>only while you use "Find pharmacy"</td>
+<td>sent <strong>from your phone directly</strong> to OpenStreetMap's Overpass service to list nearby pharmacies. 3TABZ does not receive or store it</td>
+<td>your request (consent)</td>
+</tr>
+<tr>
+<td>Camera</td>
+<td>barcode scanning</td>
+<td>read the barcode on a medicine pack <strong>on your phone</strong>; images are not uploaded</td>
+<td>your request</td>
+</tr>
+</tbody>
+</table></div>
+<p>We do <strong>not</strong> collect: contacts, photos, precise location, advertising identifiers, browsing history, or data from HealthKit/Health Connect.</p>
       </div>
 
       <div class="doc-section" id="s3">
-        <h2><span class="section-num">03</span>Data storage and security</h2>
-        <p>All data is stored on servers in secure cloud infrastructure. We implement the following protections:</p>
-        <ul>
-          <li>TLS encryption for all data in transit</li>
-          <li>AES-256 encryption for sensitive fields at rest</li>
-          <li>Hashed passwords (bcrypt, never stored in plaintext)</li>
-          <li>JWT tokens with short expiry and rotation on use</li>
-          <li>Access control: our staff can only access your data for support purposes, with logging</li>
-          <li>Regular security audits and dependency updates</li>
-        </ul>
-        <p>No system is 100% secure. If a breach occurs that affects your personal data, we will notify you within 72 hours as required by applicable law.</p>
+        <h2><span class="section-num">03</span>AI features (optional)</h2>
+<p>If you switch on "AI tips &amp; summaries" (Privacy &amp; Data), we send our AI provider [OpenAI, L.L.C., USA] only the fields needed for the feature you
+use — for example medicine names, condition names, routine statistics or the wording of your own symptom notes when you ask for an appointment
+summary. We never send your name, email, phone, exact date of birth or account id. AI output is checked by our software and never contains
+doses beyond your prescription; safety warnings are produced by fixed rules, not AI. [Confirm with OpenAI: API data is not used for training and
+retention terms — link the provider's current policy here.] You can switch AI off at any time; this stops new processing.</p>
       </div>
 
       <div class="doc-section" id="s4">
-        <h2><span class="section-num">04</span>Data sharing and third parties</h2>
-        <p>We share your data with the following categories of third parties only as necessary to provide the service:</p>
-        <table class="data-table">
-          <thead>
-            <tr><th>Service</th><th>Purpose</th><th>Data shared</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong style="color:var(--white)">OpenAI</strong></td>
-              <td>AI medication guidance</td>
-              <td>Medication names and queries (no identifying info)</td>
-            </tr>
-            <tr>
-              <td><strong style="color:var(--white)">Expo / FCM / APNs</strong></td>
-              <td>Push notifications</td>
-              <td>Push token, notification content</td>
-            </tr>
-            <tr>
-              <td><strong style="color:var(--white)">Apple / Google</strong></td>
-              <td>In-app purchase verification</td>
-              <td>Purchase receipts (no health data)</td>
-            </tr>
-            <tr>
-              <td><strong style="color:var(--white)">Email provider</strong></td>
-              <td>Transactional emails</td>
-              <td>Email address only</td>
-            </tr>
-          </tbody>
-        </table>
-        <p><strong style="color:var(--white)">We never sell your data.</strong> We never share your health data with advertisers, insurance companies, employers, or data brokers — ever.</p>
-        <p>We may disclose data if required by a valid legal process (court order, subpoena). We will notify you when legally permitted to do so.</p>
+        <h2><span class="section-num">04</span>Who we share data with (service providers)</h2>
+<p>We only share what each provider needs, under contract, to run 3TABZ:</p>
+<div class="table-wrap"><table class="data-table">
+<thead>
+<tr>
+<th>Provider</th>
+<th>Purpose</th>
+<th>Location</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Amazon Web Services</td>
+<td>hosting the API, database backups, secrets</td>
+<td>USA (us-east-1) [confirm]</td>
+</tr>
+<tr>
+<td>[MongoDB Atlas / database host]</td>
+<td>database</td>
+<td>[region]</td>
+</tr>
+<tr>
+<td>[Redis host]</td>
+<td>queues, rate limits, short-lived cache</td>
+<td>[region]</td>
+</tr>
+<tr>
+<td>Expo (650 Industries) → Apple Push Notification service / Google Firebase Cloud Messaging</td>
+<td>delivering push notifications (message text + push token)</td>
+<td>USA</td>
+</tr>
+<tr>
+<td>Apple, Google</td>
+<td>in-app purchases and subscription status</td>
+<td>USA / global</td>
+</tr>
+<tr>
+<td>[Email provider]</td>
+<td>verification codes, password resets, exports, care-partner invites</td>
+<td>[region]</td>
+</tr>
+<tr>
+<td>OpenAI (only if you enable AI)</td>
+<td>AI tips and summaries</td>
+<td>USA</td>
+</tr>
+<tr>
+<td>US FDA openFDA (public API)</td>
+<td>we look up official label text by <strong>medicine name only</strong> (no personal data)</td>
+<td>USA</td>
+</tr>
+<tr>
+<td>OpenStreetMap Overpass (from your device)</td>
+<td>pharmacy search with approximate location</td>
+<td>Germany</td>
+</tr>
+</tbody>
+</table></div>
+<p>We may disclose data if required by Nigerian law or a court order, or to protect someone's life in an emergency. Care partners see only what you
+allow. A doctor you share a report link with sees that report only while the link is valid.</p>
       </div>
 
       <div class="doc-section" id="s5">
-        <h2><span class="section-num">05</span>Your rights</h2>
-        <p>Depending on your location, you may have the following rights regarding your personal data:</p>
-        <ul>
-          <li><strong style="color:var(--white)">Access</strong> — request a copy of all data we hold about you</li>
-          <li><strong style="color:var(--white)">Export</strong> — download a machine-readable copy of your data from the app (Settings → Privacy & Data → Export my data)</li>
-          <li><strong style="color:var(--white)">Correction</strong> — update inaccurate information at any time in-app</li>
-          <li><strong style="color:var(--white)">Deletion</strong> — request permanent deletion of your account and all associated data (Settings → Privacy & Data → Delete account). Data is purged within 30 days.</li>
-          <li><strong style="color:var(--white)">Portability</strong> — receive your data in a structured, machine-readable format</li>
-          <li><strong style="color:var(--white)">Objection</strong> — object to processing for purposes other than providing the service</li>
-        </ul>
-        <p>To exercise any right, use the in-app controls or email <a href="mailto:support@3tabz.com" style="color:var(--accent)">support@3tabz.com</a>. We respond within 30 days.</p>
+        <h2><span class="section-num">05</span>International transfers</h2>
+<p>Our servers are currently outside Nigeria (see table). Under NDPA s.41–43 we transfer data only where the recipient gives adequate protection or
+another lawful basis applies. [Lawyer to confirm basis: standard contractual safeguards with each provider and/or your informed consent at sign-up.
+Consider moving storage to a region the NDPC considers adequate.]</p>
       </div>
 
       <div class="doc-section" id="s6">
-        <h2><span class="section-num">06</span>Children's privacy</h2>
-        <p>3TABZ is not directed at children under 13. We do not knowingly collect personal information from children under 13. If you are a parent or guardian and believe your child has provided us with personal data, please contact us and we will delete it promptly.</p>
-        <p>Users aged 13–17 may use the app only with parental consent.</p>
+        <h2><span class="section-num">06</span>How long we keep data</h2>
+<p>See the Data Retention Schedule (<code>https://3tabz.com/privacy#retention</code>). In short: your health data is kept while your account is active.
+When you delete your account it is removed after a <strong>30-day</strong> grace period (sign in during that time to cancel). Backups are overwritten within
+[BACKUP WINDOW, e.g. 35] days. Apple and Google keep their own purchase records under their policies. [Lawyer: confirm no per-user tax record retention is required.]</p>
       </div>
 
       <div class="doc-section" id="s7">
-        <h2><span class="section-num">07</span>Data retention</h2>
-        <p>We retain your data for as long as your account is active. When you delete your account:</p>
-        <ul>
-          <li>All health records (medications, logs, reminders, etc.) are deleted within 30 days</li>
-          <li>Account credentials are deleted immediately</li>
-          <li>Anonymised, non-identifiable usage statistics may be retained for service improvement</li>
-          <li>Billing records may be retained for up to 7 years as required by tax law</li>
-        </ul>
+        <h2><span class="section-num">07</span>Your rights (NDPA s.34–38)</h2>
+<p>You can: access your data and get a copy (Export my data — a one-time download link valid 72 hours); correct it in the app; delete your account
+(Delete my account) or individual entries; withdraw consent at any time (as easily as you gave it, s.35) — e.g. turn off AI or care-partner sharing;
+object to processing; not be subject to solely automated decisions with significant effects (3TABZ makes none); and complain to the
+<strong>Nigeria Data Protection Commission</strong> (ndpc.gov.ng). UK/EU users also have equivalent rights under UK/EU GDPR and may complain to the ICO or their
+local authority. Email dpo@3tabz.com — we reply within [30] days.</p>
       </div>
 
       <div class="doc-section" id="s8">
-        <h2><span class="section-num">08</span>International transfers</h2>
-        <p>3TABZ operates globally. Your data may be processed in countries outside your own, including the United States and European Union. Where required, we use Standard Contractual Clauses or other lawful transfer mechanisms to protect your data.</p>
+        <h2><span class="section-num">08</span>Security</h2>
+<p>HTTPS for all traffic; passwords hashed with bcrypt; free-text health notes encrypted field-by-field (AES-256-GCM) on top of storage encryption;
+sign-in tokens stored in your phone's secure keychain; admin access needs two-factor sign-in and every admin action is logged; optional app lock and
+discreet notifications. No system is perfectly secure. If a breach is likely to risk your rights we will notify the NDPC within <strong>72 hours</strong> (s.40) and
+tell you without undue delay where the risk is high.</p>
       </div>
 
       <div class="doc-section" id="s9">
-        <h2><span class="section-num">09</span>Changes to this policy</h2>
-        <p>We may update this Privacy Policy from time to time. When we make material changes, we will notify you by email and with an in-app banner at least 14 days before the change takes effect. Your continued use of 3TABZ after that date constitutes acceptance of the updated policy.</p>
-        <p>The "Last updated" date at the top of this page reflects the most recent revision.</p>
+        <h2><span class="section-num">09</span>Children</h2>
+<p>3TABZ accounts are for adults (18+). Parents/guardians may record information about their children as dependants; they are responsible for having
+the authority to do so. We do not knowingly create accounts for children. Contact us if you think a child has an account.</p>
       </div>
 
       <div class="doc-section" id="s10">
-        <h2><span class="section-num">10</span>Contact us</h2>
-        <p>For any privacy-related questions, data requests, or concerns:</p>
-        <ul>
-          <li>Email: <a href="mailto:support@3tabz.com" style="color:var(--accent)">support@3tabz.com</a></li>
-          <li>In-app: Settings → Privacy & Data → Data requests</li>
-        </ul>
-        <p>We are committed to resolving complaints. If you are in the European Economic Area and believe your rights have been violated, you also have the right to lodge a complaint with your local data protection authority.</p>
+        <h2><span class="section-num">10</span>Notifications on shared phones</h2>
+<p>Reminders may show medicine names on your lock screen. Turn on <strong>Discreet reminders</strong> to hide them.</p>
       </div>
 
+      <div class="doc-section" id="s11">
+        <h2><span class="section-num">11</span>Changes</h2>
+<p>We will notify you in the app before material changes take effect and record the policy version you accepted.</p>
+      </div>
+
+      <div class="doc-section" id="s12">
+        <h2><span class="section-num">12</span>Contact</h2>
+<p>3tabz, [REGISTERED ADDRESS] · privacy@3tabz.com · DPO: dpo@3tabz.com</p>
+<p><em>References: Nigeria Data Protection Act 2023 s.25, s.30, s.31, s.34–38, s.39–43, s.65 (<a href="https://assets.kpmg.com/content/dam/kpmg/ng/pdf/nigeria-data-protection-act2023.pdf">text</a>); NDPC GAID 2025 (<a href="https://ndpc.gov.ng/wp-content/uploads/2025/07/NDP-ACT-GAID-2025-MARCH-20TH.pdf">PDF</a>); Apple Guideline 5.1.3 (<a href="https://developer.apple.com/app-store/review/guidelines/">Apple</a>); Google Play account-deletion requirements (<a href="https://support.google.com/googleplay/android-developer/answer/13327111?hl=en-GB">Google</a>).</em></p>
+      </div>
+
+      <div class="doc-section" id="s13">
+        <h2><span class="section-num">13</span>Retention schedule</h2>
+<a id="retention"></a>
+<p>Version 2026-10-16. Reflects the retention rules implemented in the API code (TTL indexes and the deletion job). Review annually.</p>
+<div class="table-wrap"><table class="data-table">
+<thead>
+<tr>
+<th>Data</th>
+<th>Retention</th>
+<th>How it's enforced</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Account &amp; health data (medicines, logs, journal, check-ins, readings, meal plans, care partners, dependants, referrals, subscriptions)</td>
+<td>while the account is active; deleted 30 days after a deletion request</td>
+<td><code>account-deletion-executor</code> cron → <code>DELETE_ACCOUNT</code> job removes the user and 27 related collections</td>
+</tr>
+<tr>
+<td>Unverified sign-ups (email code)</td>
+<td>code valid 15 min</td>
+<td>verification TTL in user record</td>
+</tr>
+<tr>
+<td>Refresh tokens</td>
+<td>30-day lifetime; purged 7 days after expiry</td>
+<td>TTL index on <code>expiresAt</code> (+7 days)</td>
+</tr>
+<tr>
+<td>Password-reset tokens</td>
+<td>single use, short expiry</td>
+<td>refresh-token collection with <code>type=password-reset</code></td>
+</tr>
+<tr>
+<td>Data export files</td>
+<td>one-time download link, 72 hours</td>
+<td>TTL index on <code>expiresAt</code></td>
+</tr>
+<tr>
+<td>Shared doctor-report links</td>
+<td>until expiry (1–14 days chosen by user) + 7 days, then removed</td>
+<td>TTL index on <code>expiresAt</code></td>
+</tr>
+<tr>
+<td>Notification delivery log (type, outcome, opened)</td>
+<td>120 days</td>
+<td>TTL index</td>
+</tr>
+<tr>
+<td>Expo push receipts tickets</td>
+<td>2 days</td>
+<td>TTL index</td>
+</tr>
+<tr>
+<td>AI usage log (tokens, feature, no prompt text)</td>
+<td>400 days</td>
+<td>TTL index</td>
+</tr>
+<tr>
+<td>Store webhook events (idempotency)</td>
+<td>180 days</td>
+<td>TTL index</td>
+</tr>
+<tr>
+<td>Admin sessions</td>
+<td>expiry + 1 day</td>
+<td>TTL index</td>
+</tr>
+<tr>
+<td>Admin audit log</td>
+<td>2 years (730 days)</td>
+<td>TTL index</td>
+</tr>
+<tr>
+<td>Server application logs</td>
+<td>[set in CloudWatch: e.g. 30 days]</td>
+<td>log group retention setting</td>
+</tr>
+<tr>
+<td>Database backups</td>
+<td>[e.g. 35 days point-in-time]</td>
+<td>database provider setting</td>
+</tr>
+<tr>
+<td>On-device data (tokens, medicine cache, offline queue, PDFs)</td>
+<td>until sign-out / uninstall</td>
+<td><code>wipeLocalData()</code> on sign-out and account deletion</td>
+</tr>
+</tbody>
+</table></div>
+      </div>
       <div class="contact-cta">
-        <h3>Questions about your data?</h3>
+        <h3>Questions?</h3>
         <p>We're here to help. Contact our team directly.</p>
         <a href="mailto:support@3tabz.com" class="btn">Email support@3tabz.com</a>
       </div>
-
     </div>
   </div>
 
   <footer>
     <div class="container">
-      <div class="footer-copy">© 2025 3TABZ. All rights reserved.</div>
       <div class="footer-legal">
-        <a href="privacy.html">Privacy</a>
-        <a href="terms.html">Terms</a>
-        <a href="support.html">Support</a>
+        <a href="/privacy">Privacy</a>
+        <a href="/terms">Terms</a>
+        <a href="/medical-disclaimer">Medical disclaimer</a>
+        <a href="/subscription-terms">Subscriptions</a>
+        <a href="/delete-account">Delete account</a>
+        <a href="/cookies">Cookies</a>
+        <a href="/support">Support</a>
       </div>
+      <div class="footer-copy">© 2026 3TABZ. All rights reserved. 3TABZ does not diagnose or treat. Always follow your doctor or pharmacist.</div>
     </div>
   </footer>
-
 </body>
 </html>

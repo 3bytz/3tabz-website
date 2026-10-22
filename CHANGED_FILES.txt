@@ -1,0 +1,44 @@
+3TABZ 1.1.0 (22 Oct 2026): changes against the files you uploaded
+
+Added (19)
+  + .vercelignore
+  + account.html
+  + apple-touch-icon.png
+  + billing.js
+  + docs/GROWTH_AND_MARKET_RESEARCH.md
+  + docs/MASTER_PROMPT.md
+  + docs/SECURITY_AND_SCALE_REVIEW_2026-10-22.md
+  + docs/SPLASH_VIDEO_PROMPTS.md
+  + docs/WEB_BILLING_AND_REVENUECAT.md
+  + favicon.png
+  + img/og-image.png
+  + img/screen-add.webp
+  + img/screen-meds.webp
+  + img/screen-pro.webp
+  + img/screen-quick-actions.webp
+  + img/screen-today.webp
+  + landing.js
+  + subscribe.html
+  + support.js
+
+Modified (18)
+  ~ appicon.png
+  ~ appicon2.png
+  ~ conditions/diabetes.html
+  ~ conditions/hypertension.html
+  ~ conditions/sickle-cell.html
+  ~ cookies.html
+  ~ delete-account.html
+  ~ docs/STORE_SUBMISSION_PACK.md
+  ~ index.html
+  ~ medical-disclaimer.html
+  ~ privacy.html
+  ~ reset-password.html
+  ~ reset-password.js
+  ~ site.css
+  ~ subscription-terms.html
+  ~ support.html
+  ~ terms.html
+  ~ vercel.json
+
+Deleted (0)
