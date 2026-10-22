@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Subscribe to 3TABZ Pro</title>
+  <meta name="description" content="Choose a 3TABZ Pro plan and pay securely online. Pro unlocks in the app when you sign in with the same email." />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="api-base" content="https://api.3tabz.com/v1" />
+  <meta name="robots" content="noindex" />
+  <meta name="referrer" content="no-referrer" />
+  <link rel="icon" href="/favicon.png" type="image/png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/site.css" />
+  <style>
+    .wrap { max-width: 520px; margin: 0 auto; padding: 48px 24px 24px; }
+    .wrap h1 { font-size: clamp(30px, 6vw, 44px); }
+    .sub { color: var(--ink-soft); font-size: 17px; margin-bottom: 24px; }
+    .stack { display: grid; gap: 14px; }
+    .chip { border: 1.5px solid var(--line); background: #fff; border-radius: 999px; padding: 10px 14px; font: 600 13px var(--font-body); color: var(--ink-soft); cursor: pointer; text-align: left; }
+    .chip.on { border-color: var(--ink); color: var(--ink); }
+    .chips { display: grid; gap: 8px; }
+    .plan-row { display: flex; align-items: center; gap: 14px; background: #fff; border: 2px solid var(--line); border-radius: 20px; padding: 16px 18px; cursor: pointer; }
+    .plan-row.on { border-color: var(--ink); }
+    .plan-row input { accent-color: #151A17; width: 18px; height: 18px; }
+    .plan-row .pl { flex: 1; display: grid; }
+    .plan-row .pl b { font-family: var(--font-display); font-size: 16px; }
+    .plan-row .pl small { color: var(--muted); font-size: 13px; }
+    .plan-row .pp { font-family: var(--font-display); font-weight: 700; }
+    .legal { font-size: 13px; color: var(--muted); }
+    .link { background: none; border: 0; color: var(--sage-deep); text-decoration: underline; cursor: pointer; font: inherit; padding: 0; }
+    .row { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+    .status { font-family: var(--font-display); font-weight: 700; font-size: 22px; }
+    .code { letter-spacing: 10px; font-family: var(--font-display); font-size: 24px; text-align: center; }
+    .pills { display: flex; gap: 6px; justify-content: center; margin-bottom: 18px; }
+  </style>
+</head>
+<body data-mode="subscribe">
+  <nav><div class="container"><a class="nav-logo" href="/"><img src="/favicon.png" alt="" width="34" height="34" />3TABZ</a><a class="nav-back" href="/">Back to home</a></div></nav>
+  <main class="wrap">
+    <div class="pills"><img src="/favicon.png" alt="" width="64" height="64" style="border-radius:16px" /></div>
+    <h1>3TABZ Pro</h1>
+    <p class="sub">Full history, patterns, appointment summaries, unlimited meal plans and caregiver mode. Pay here, and Pro unlocks in the app on the same account.</p>
+      <div id="step-email" class="card stack" hidden>
+        <form id="email-form" class="stack" novalidate>
+          <div><label for="email">Email you use in the 3TABZ app</label><input id="email" type="email" autocomplete="email" required maxlength="254" /></div>
+          <button id="email-btn" class="btn btn-primary" type="submit">Send me a code</button>
+        </form>
+        <div id="email-msg" class="note" hidden></div>
+        <p class="legal">We'll email a 6-digit code. No password needed. Don't have an account yet? Download the app and sign up first, so your plan has somewhere to go.</p>
+      </div>
+      <div id="step-code" class="card stack" hidden>
+        <p>We sent a code to <b id="code-email"></b>. It expires in 10 minutes.</p>
+        <form id="code-form" class="stack" novalidate>
+          <div><label for="code">6-digit code</label><input id="code" class="code" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="6" pattern="[0-9]*" /></div>
+          <button id="code-btn" class="btn btn-primary" type="submit">Continue</button>
+        </form>
+        <div id="code-msg" class="note" hidden></div>
+        <button id="code-back" class="link" type="button">Use a different email</button>
+      </div>
+      <div id="step-busy" class="card" hidden><p>Loading…</p></div>
+      <div id="step-plans" class="stack" hidden>
+        <div class="row"><span class="legal">Signed in as <b id="who"></b></span><button class="link" type="button" data-signout>Sign out</button></div>
+        <div id="already" class="card stack" hidden>
+          <div class="status">You already have Pro</div>
+          <p>Open the 3TABZ app and pull down on the Today screen to refresh. To change or cancel your plan, go to <a href="/account">your account</a>.</p>
+        </div>
+        <div id="plan-area" class="stack">
+          <div id="providers" class="chips"></div>
+          <div id="plans" class="stack"></div>
+          <button id="pay" class="btn btn-primary" type="button">Continue to secure checkout</button>
+          <p id="legal" class="legal"></p>
+          <p class="legal">By continuing you agree to the <a href="/terms">Terms</a> and <a href="/subscription-terms">Subscription terms</a>. Reminders, logging and safety checks are free for everyone.</p>
+        </div>
+        <div id="plans-msg" class="note" hidden></div>
+      </div>
+  </main>
+  <footer><div class="container"><div class="footer-links"><a href="/support">Support</a><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/subscription-terms">Subscription terms</a><a href="/medical-disclaimer">Medical disclaimer</a></div><p class="footer-legal">3TABZ is a self-management tool, not a medical device. Payments are processed securely by our payment partners; 3TABZ never sees your full card number.</p></div></footer>
+  <script src="/billing.js" defer></script>
+</body>
+</html>
